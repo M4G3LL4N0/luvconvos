@@ -23,7 +23,7 @@ export async function getUser() {
   return user
 }
 
-export async function protectedAction<T extends (...args: any[]) => Promise<any>>(
+export async function protectedAction<T extends (...args: never[]) => Promise<unknown>>(
   action: T,
   ...args: Parameters<T>
 ): Promise<Awaited<ReturnType<T>>> {

@@ -28,7 +28,7 @@ export function AuthProvider({
 }) {
   const [session, setSession] = useState<Session | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [, setError] = useState<string | null>(null)
   const router = useRouter()
 
   useEffect(() => {

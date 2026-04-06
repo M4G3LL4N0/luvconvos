@@ -10,7 +10,6 @@ import { AuthProvider } from './auth-provider'
 import { createClient } from '../../lib/supabase/client'
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const router = useRouter()
   const supabaseClient = createClient()
 
   return (
