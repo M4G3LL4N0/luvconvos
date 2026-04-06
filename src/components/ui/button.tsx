@@ -144,15 +144,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         suppressHydrationWarning={isPending}
         {...props}
       >
-        <>
-          {loading && (
-            <span className="absolute inset-0 flex items-center justify-center">
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-            </span>
-          )}
-          {leftIcon && <span className="shrink-0">{leftIcon}</span>}
-          {children}
-          {rightIcon && <span className="shrink-0">{rightIcon}</span>}
+        {loading && (
+          <span className="absolute inset-0 flex items-center justify-center">
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+          </span>
+        )}
+        {leftIcon && <span className="shrink-0">{leftIcon}</span>}
+        {children}
+        {rightIcon && <span className="shrink-0">{rightIcon}</span>}
       </Comp>
     )
   }

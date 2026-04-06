@@ -1,11 +1,8 @@
 'use client'
 
-'use client'
-
 import { ThemeProvider } from './theme-provider'
 import { ErrorBoundary } from './error-boundary'
 import { Suspense } from 'react'
-import { useRouter } from 'next/navigation'
 import { AuthProvider } from './auth-provider'
 import { createClient } from '../../lib/supabase/client'
 
