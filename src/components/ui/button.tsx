@@ -125,7 +125,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ...props
   }, ref) => {
     const Comp = asChild ? Slot : 'button'
-    const isPending = loading || variant === 'loading' || ariaBusy === 'true'
+    const isPending = loading || variant === 'loading'
     
     return (
       <Comp
@@ -138,13 +138,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={asChild ? undefined : type}
         disabled={disabled || undefined}
-        aria-busy={isPending ? 'true' : undefined}
+        aria-busy={isPending ? 'true' : 'false'}
         aria-live={isPending ? 'polite' : ariaLive}
         {...props}
       >
         {loading && (
           <span className="absolute inset-0 flex items-center justify-center">
-            <span className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full" />
+            <span className="h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
           </span>
         )}
         <span className={cn('flex items-center gap-2', loading && 'opacity-0')}>

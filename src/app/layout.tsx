@@ -56,11 +56,12 @@ export default function RootLayout({
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
+            storageKey="luvconvos-theme"
           >
             <ErrorBoundary>
               <Suspense fallback={
                 <div className="flex-1 flex items-center justify-center">
-                  <span className="animate-pulse">Loading...</span>
+                  <span className="text-muted-foreground">Loading...</span>
                 </div>
               }>
                 {children}
