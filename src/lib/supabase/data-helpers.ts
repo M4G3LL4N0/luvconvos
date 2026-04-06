@@ -7,7 +7,12 @@ import { redirect } from 'next/navigation'
 export async function getSession() {
   const supabase = createClient(cookies())
   const { data, error } = await supabase.auth.getSession()
-  if (error) throw error
+  
+  if (error) {
+    console.error('Failed to get session:', error)
+    return null
+  }
+
   return data.session
 }
 

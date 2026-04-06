@@ -117,7 +117,19 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <Comp
-        onClick={handleClick}
+        onClick={async (e) => {
+          if (props.requireAuth && !isAuthenticated) {
+            router.push('/login')
+            return
+          }
+          try {
+            if (props.onClick) {
+              await props.onClick(e)
+            }
+          } catch (error) {
+            console.error('Button action failed:', error)
+          }
+        }}
         className={cn(
           buttonVariants({ variant, size }),
           className,
