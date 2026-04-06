@@ -11,20 +11,23 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        // Core variants
         primary: 'bg-brand text-brand-foreground shadow hover:bg-brand/90',
         secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
         destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
         outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-brand underline-offset-4 hover:underline',
+        ghost: 'hover:bg-accent hover:text-accent-foreground shadow-none',
+        link: 'text-brand underline-offset-4 hover:underline shadow-none',
+
+        // Semantic variants (communication specific)
         emotion: 'rounded-full bg-emotion text-emotion-foreground hover:bg-emotion/90',
         response: 'rounded-full bg-response text-response-foreground hover:bg-response/90',
         feedback: 'rounded-full bg-feedback text-feedback-foreground hover:bg-feedback/90',
-        loading: 'relative overflow-hidden after:absolute after:inset-0 after:animate-pulse after:bg-muted/50',
+        success: 'bg-success text-success-foreground hover:bg-success/90',
+
+        // State variants
+        loading: 'cursor-wait',
         error: 'bg-error text-error-foreground hover:bg-error/90',
-        disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
-        typing: 'animate-pulse bg-muted text-muted-foreground',
-        sent: 'bg-success text-success-foreground hover:bg-success/90',
       },
       size: {
         default: 'h-9 px-4 py-2',
@@ -49,28 +52,51 @@ interface IconProps extends React.SVGAttributes<SVGElement> {
   size?: number
 }
 
-interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+interface ButtonBaseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Render as child component
+   * @default false
+   */
   asChild?: boolean
-  variant?: ButtonVariantTypes
-  size?: ButtonSizeTypes
-  state?: ButtonStateTypes
+  /**
+   * Button visual variant
+   * @default 'primary'
+   */
+  variant?: ButtonVariant
+  /**
+   * Button size
+   * @default 'default'
+   */
+  size?: ButtonSize
+  /**
+   * Loading state
+   * @default false
+   */
+  loading?: boolean
+  /**
+   * Left icon component
+   */
   leftIcon?: React.ReactElement<IconProps>
+  /**
+   * Right icon component
+   */
   rightIcon?: React.ReactElement<IconProps>
 }
 
+type ButtonProps = ButtonBaseProps & VariantProps<typeof buttonVariants>
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ 
+  ({
     className,
     variant = 'primary',
     size = 'default',
-    state,
+    loading = false,
     asChild = false,
     type = 'button',
     leftIcon,
     rightIcon,
     children,
+    disabled,
     ...props
   }, ref) => {
     const Comp = asChild ? Slot : 'button'
