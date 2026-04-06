@@ -19,6 +19,10 @@ const buttonConfig = {
     emotion: 'rounded-full bg-emerald-100 text-emerald-900 hover:bg-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-100 dark:hover:bg-emerald-900/50',
     response: 'bg-blue-100 text-blue-900 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-100 dark:hover:bg-blue-900/50',
     feedback: 'bg-purple-100 text-purple-900 hover:bg-purple-200 dark:bg-purple-900/30 dark:text-purple-100 dark:hover:bg-purple-900/50',
+    // State variants
+    loading: 'opacity-75 cursor-wait',
+    error: 'bg-destructive/50 text-destructive-foreground hover:bg-destructive/70',
+    disabled: 'opacity-50 cursor-not-allowed',
   },
   size: {
     default: 'h-9 px-4 py-2',
