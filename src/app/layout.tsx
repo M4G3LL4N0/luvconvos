@@ -1,8 +1,6 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
-import type { ReactNode } from 'react'
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,7 +26,9 @@ type RootLayoutProps = Readonly<{
   children: ReactNode
 }>
 import { ThemeProvider } from '@/components/theme-provider'
+import type { ThemeProviderProps } from '@/components/theme-provider'
 import { ErrorBoundary } from '@/components/error-boundary'
+import type { ErrorBoundaryProps } from '@/components/error-boundary'
 
 export default function RootLayout({
   children,

@@ -98,15 +98,18 @@ export interface ButtonProps
   /**
    * Optional loading state
    */
+  /**
+   * @default false
+   */
   loading?: boolean
   /**
    * Optional left icon component
    */
-  leftIcon?: React.ReactNode
+  leftIcon?: React.ReactElement<SVGElement | HTMLSpanElement>
   /**
    * Optional right icon component
    */
-  rightIcon?: React.ReactNode
+  rightIcon?: React.ReactElement<SVGElement | HTMLSpanElement>
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -126,7 +129,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ...props
   }, ref) => {
     const Comp = asChild ? Slot : 'button'
-    const isPending = variant === 'loading' || ariaBusy === 'true'
+    const isPending = loading || variant === 'loading' || ariaBusy === 'true'
     
     return (
       <Comp
