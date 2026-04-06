@@ -77,7 +77,6 @@ const buttonVariants = cva(
   }
 )
 
-export type { VariantProps as ButtonVariantProps } from 'class-variance-authority'
 export type ButtonVariant = VariantProps<typeof buttonVariants>['variant']
 export type ButtonSize = VariantProps<typeof buttonVariants>['size']
 
@@ -95,9 +94,6 @@ export interface ButtonProps
    * @default 'button'
    */
   type?: 'button' | 'submit' | 'reset'
-  /**
-   * Optional loading state
-   */
   /**
    * @default false
    */
