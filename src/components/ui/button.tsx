@@ -40,7 +40,7 @@ const buttonConfig = {
   },
 } as const
 
-const buttonVariantsInternal = cva(
+const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
   {
     variants: buttonConfig,
@@ -51,14 +51,13 @@ const buttonVariantsInternal = cva(
   }
 )
 
-export const buttonVariants = buttonVariantsInternal
-
-export type ButtonVariant = keyof typeof buttonConfig.variant
-export type ButtonSize = keyof typeof buttonConfig.size
+export type { VariantProps as ButtonVariantProps } from 'class-variance-authority'
+export type ButtonVariant = VariantProps<typeof buttonVariants>['variant']
+export type ButtonSize = VariantProps<typeof buttonVariants>['size']
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariantsInternal> {
+    VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
@@ -80,7 +79,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp
         className={cn(
-          buttonVariantsInternal({ variant, size, className }),
+          buttonVariants({ variant, size, className }),
           isPending && 'cursor-wait',
           disabled && 'cursor-not-allowed'
         )}
