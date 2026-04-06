@@ -28,13 +28,11 @@ const buttonVariants = cva(
       },
       size: {
         default: 'h-9 px-4 py-2',
-        sm: 'h-8 rounded-md px-3 text-xs',
-        lg: 'h-10 rounded-md px-8',
-        icon: 'h-9 w-9',
-        'icon-sm': 'h-8 w-8',
-        'icon-lg': 'h-10 w-10',
-        bubble: 'h-auto px-4 py-2 rounded-full',
-        'bubble-sm': 'h-auto px-3 py-1.5 text-xs rounded-full',
+        sm: 'h-8 px-3 text-xs',
+        lg: 'h-10 px-8',
+        icon: 'h-9 w-9 p-0',
+        iconSm: 'h-8 w-8 p-0',
+        iconLg: 'h-10 w-10 p-0',
       }
     },
     defaultVariants: {
