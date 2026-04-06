@@ -3,7 +3,7 @@
  * Component-specific variants and CVA configs belong inside their component files.
  */
 
-export const COLOR_SCALES = {
+export const colorScales = {
   primary: [
     'primary-50',
     'primary-100', 
@@ -58,14 +58,14 @@ export const COLOR_SCALES = {
   ],
 } as const
 
-export const TEXT_SCALES = ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl'] as const
-export type TextScale = (typeof TEXT_SCALES)[number]
+export const textScales = ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl'] as const
+export type TextScale = (typeof textScales)[number]
 
-export const RADIUS_SCALES = ['none', 'sm', 'md', 'lg', 'xl', '2xl', 'full'] as const
-export type RadiusScale = (typeof RADIUS_SCALES)[number]
+export const radiusScales = ['none', 'sm', 'md', 'lg', 'xl', '2xl', 'full'] as const
+export type RadiusScale = (typeof radiusScales)[number]
 
-export const ELEVATION_LEVELS = ['none', 'sm', 'md', 'lg', 'xl'] as const
-export type ElevationLevel = (typeof ELEVATION_LEVELS)[number]
+export const elevationLevels = ['none', 'sm', 'md', 'lg', 'xl'] as const
+export type ElevationLevel = (typeof elevationLevels)[number]
 
-export const SURFACE_STYLES = ['solid', 'subtle', 'glass'] as const
-export type SurfaceStyle = (typeof SURFACE_STYLES)[number]
+export const surfaceStyles = ['solid', 'subtle', 'glass'] as const
+export type SurfaceStyle = (typeof surfaceStyles)[number]
