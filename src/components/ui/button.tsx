@@ -15,6 +15,10 @@ const buttonConfig = {
       'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
     ghost: 'hover:bg-accent hover:text-accent-foreground',
     link: 'text-primary underline-offset-4 hover:underline',
+    // Communication variants
+    emotion: 'rounded-full bg-emerald-100 text-emerald-900 hover:bg-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-100 dark:hover:bg-emerald-900/50',
+    response: 'bg-blue-100 text-blue-900 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-100 dark:hover:bg-blue-900/50',
+    feedback: 'bg-purple-100 text-purple-900 hover:bg-purple-200 dark:bg-purple-900/30 dark:text-purple-100 dark:hover:bg-purple-900/50',
   },
   size: {
     default: 'h-9 px-4 py-2',
@@ -23,6 +27,9 @@ const buttonConfig = {
     icon: 'h-9 w-9',
     'icon-sm': 'h-8 w-8',
     'icon-lg': 'h-10 w-10',
+    // Communication sizes
+    bubble: 'h-auto px-4 py-2 rounded-full',
+    'bubble-sm': 'h-auto px-3 py-1.5 text-xs rounded-full',
   },
 } as const
 
