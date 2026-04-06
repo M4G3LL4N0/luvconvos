@@ -6,25 +6,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
 import type { ButtonHTMLAttributes, RefAttributes } from 'react'
 
-type ButtonVariantTypes = 'primary' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link'
-type ButtonSizeTypes = 'default' | 'sm' | 'lg' | 'icon' | 'icon-sm' | 'icon-lg' | 'bubble' | 'bubble-sm'
-type ButtonStateTypes = 'loading' | 'disabled'
-
 const buttonConfig = {
-  variant: {
-    primary: 'bg-brand text-brand-foreground shadow hover:bg-brand/90',
-    secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
-    destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
-    outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-    ghost: 'hover:bg-accent hover:text-accent-foreground',
-    link: 'text-brand underline-offset-4 hover:underline'
-  },
-  state: {
-    loading: 'relative overflow-hidden cursor-wait pointer-events-none',
-    disabled: 'opacity-50 cursor-not-allowed pointer-events-none'
-  },
-
-const buttonConfig: ButtonConfig = {
   variant: {
     primary: 'bg-brand text-brand-foreground shadow hover:bg-brand/90',
     secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
@@ -68,35 +50,11 @@ const buttonVariants = cva(
   }
 )
 
-export type ButtonVariant = keyof typeof buttonConfig.variant
-export type ButtonSize = keyof typeof buttonConfig.size
+type ButtonVariant = keyof typeof buttonConfig.variant
+type ButtonSize = keyof typeof buttonConfig.size
 
-export interface ButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
-  variant?: ButtonVariant
-  size?: ButtonSize
-  /**
-   * @default false
-   */
-  disabled?: boolean
-  /**
-   * @default 'button'
-   */
-  type?: 'button' | 'submit' | 'reset'
-  /**
-   * @default false
-   */
-  loading?: boolean | 'true' | 'false'
-  /**
-   * Optional left icon component
-   */
-  leftIcon?: React.ReactElement<SVGElement | HTMLSpanElement>
-  /**
-   * Optional right icon component
-   */
-  rightIcon?: React.ReactElement<SVGElement | HTMLSpanElement>
+interface IconProps extends React.SVGAttributes<SVGElement> {
+  size?: number
 }
 
 interface ButtonProps
@@ -159,6 +117,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button'
 
+export const buttonVariants = {
+  sizes: buttonConfig.size,
+  variants: buttonConfig.variant,
+  states: {
+    loading: buttonConfig.variant.loading,
+    disabled: buttonConfig.variant.disabled
+  }
+}
+
 export { Button }
 export default Button
-export type { ButtonProps }
+export type { ButtonProps, ButtonVariant, ButtonSize }
