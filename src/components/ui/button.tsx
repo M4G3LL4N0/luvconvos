@@ -102,7 +102,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           buttonVariants({ variant, size }),
           className,
           loading && 'relative overflow-hidden',
-          disabled && 'opacity-50'
+          disabled && 'opacity-50 cursor-not-allowed'
         )}
         ref={ref}
         type={asChild ? undefined : type}

@@ -1,10 +1,14 @@
 'use client'
 
+'use client'
+
 import { ThemeProvider } from './theme-provider'
 import { ErrorBoundary } from './error-boundary'
 import { Suspense } from 'react'
+import { useRouter } from 'next/navigation'
 
 export function Providers({ children }: { children: React.ReactNode }) {
+  const router = useRouter()
   return (
     <ThemeProvider
       attribute="class"
