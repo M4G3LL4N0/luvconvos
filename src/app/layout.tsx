@@ -35,6 +35,10 @@ type RootLayoutProps = Readonly<{
   children: ReactNode
 }>
 
+import { Suspense } from 'react'
+import { ThemeProvider } from '@/components/theme-provider'
+import { ErrorBoundary } from '@/components/error-boundary'
+
 export default function RootLayout({
   children,
 }: RootLayoutProps): ReactNode {
@@ -56,7 +60,18 @@ export default function RootLayout({
           Skip to main content
         </a>
         <div id="main-content" className="flex-1 flex flex-col max-w-7xl mx-auto w-full">
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ErrorBoundary>
+              <Suspense fallback={<div className="flex-1 flex items-center justify-center">Loading...</div>}>
+                {children}
+              </Suspense>
+            </ErrorBoundary>
+          </ThemeProvider>
         </div>
       </body>
     </html>

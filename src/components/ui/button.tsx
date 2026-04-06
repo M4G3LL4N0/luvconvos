@@ -137,7 +137,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           buttonVariants({ variant, size, className }),
           isPending && 'cursor-wait',
-          disabled && 'cursor-not-allowed'
+          disabled && 'cursor-not-allowed',
+          loading && 'relative overflow-hidden'
         )}
         ref={ref}
         type={asChild ? undefined : type}
@@ -145,7 +146,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={isPending ? 'true' : undefined}
         aria-live={isPending ? 'polite' : ariaLive}
         {...props}
-      />
+      >
+        {loading && (
+          <span className="absolute inset-0 flex items-center justify-center">
+            <span className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full" />
+          </span>
+        )}
+        <span className={cn('flex items-center gap-2', loading && 'opacity-0')}>
+          {leftIcon && <span className="shrink-0">{leftIcon}</span>}
+          {children}
+          {rightIcon && <span className="shrink-0">{rightIcon}</span>}
+        </span>
+      </Comp>
     )
   }
 )
