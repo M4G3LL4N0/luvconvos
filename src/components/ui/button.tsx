@@ -111,15 +111,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button'
 
-export const buttonVariants = {
-  sizes: buttonConfig.size,
-  variants: buttonConfig.variant,
-  states: {
-    loading: buttonConfig.variant.loading,
-    disabled: buttonConfig.variant.disabled
-  }
-}
-
 export { Button }
 export default Button
 export type { ButtonProps, ButtonVariant, ButtonSize }
