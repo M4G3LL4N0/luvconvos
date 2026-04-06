@@ -23,7 +23,7 @@ export default function Home() {
         </p>
 
         <div className="z-20 mt-10 flex gap-4">
-          <Button size="lg" asChild>
+          <Button size="lg" asChild variant="default">
             <Link href="/sign-up">
               Try Free <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
