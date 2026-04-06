@@ -25,10 +25,7 @@ import { Suspense, type ReactNode } from 'react'
 type RootLayoutProps = Readonly<{
   children: ReactNode
 }>
-import { ThemeProvider } from '../../components/theme-provider'
-import type { ThemeProviderProps } from '../../components/theme-provider'
-import { ErrorBoundary } from '../../components/error-boundary'
-import type { ErrorBoundaryProps } from '../../components/error-boundary'
+import { Providers } from '../../components/providers'
 
 export default function RootLayout({
   children,
@@ -51,23 +48,9 @@ export default function RootLayout({
           Skip to main content
         </a>
         <div id="main-content" className="flex-1 flex flex-col max-w-7xl mx-auto w-full">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="luvconvos-theme"
-          >
-            <ErrorBoundary>
-              <Suspense fallback={
-                <div className="flex-1 flex items-center justify-center">
-                  <span className="text-muted-foreground">Loading...</span>
-                </div>
-              }>
-                {children}
-              </Suspense>
-            </ErrorBoundary>
-          </ThemeProvider>
+          <Providers>
+            {children}
+          </Providers>
         </div>
       </body>
     </html>
