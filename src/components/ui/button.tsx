@@ -45,8 +45,8 @@ export const buttonVariants = cva(
   }
 )
 
-type ButtonVariant = VariantProps<typeof buttonVariants>['variant']
-type ButtonSize = VariantProps<typeof buttonVariants>['size']
+export type ButtonVariant = keyof (typeof buttonVariants)['variants']['variant']
+export type ButtonSize = keyof (typeof buttonVariants)['variants']['size']
 
 interface IconProps extends React.SVGAttributes<SVGElement> {
   size?: number
