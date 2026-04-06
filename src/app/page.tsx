@@ -23,14 +23,14 @@ export default function Home() {
         </p>
 
         <div className="z-20 mt-10 flex gap-4">
-          <Button size="lg" variant="default" asChild>
+          <Button size="lg" asChild>
             <Link href="/sign-up">
               Try Free <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
-          <Button variant="outline" size="lg" className="group hover:bg-zinc-800" asChild>
+          <Button variant="secondary" size="lg" asChild>
             <Link href="/pricing">
-              <Zap className="mr-2 h-4 w-4 group-hover:text-amber-400 transition-colors" />
+              <Zap className="mr-2 h-4 w-4" />
               Get Pro
             </Link>
           </Button>
@@ -50,7 +50,12 @@ export default function Home() {
               <h3 className="text-xl font-semibold text-cyan-400 mb-2">Example Analysis</h3>
               <p className="text-zinc-300">See what our AI reveals about your communication:</p>
             </div>
-            <Button variant="ghost" size="sm" className="text-zinc-400 hover:bg-zinc-700/50 hover:text-cyan-400">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-zinc-400 hover:bg-zinc-700/50 hover:text-cyan-400"
+              disabled // Temporarily disabled until share functionality is implemented
+            >
               <Share2 className="mr-2 h-4 w-4" /> Share
             </Button>
           </div>
