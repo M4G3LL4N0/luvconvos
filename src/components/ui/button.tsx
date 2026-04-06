@@ -6,43 +6,37 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
 import type { ButtonHTMLAttributes, RefAttributes } from 'react'
 
-const buttonConfig = {
-  variant: {
-    primary: 'bg-brand text-brand-foreground shadow hover:bg-brand/90',
-    secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
-    destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
-    outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-    ghost: 'hover:bg-accent hover:text-accent-foreground',
-    link: 'text-brand underline-offset-4 hover:underline',
-    // Communication variants
-    emotion: 'rounded-full bg-emotion text-emotion-foreground hover:bg-emotion/90',
-    response: 'rounded-full bg-response text-response-foreground hover:bg-response/90',
-    feedback: 'rounded-full bg-feedback text-feedback-foreground hover:bg-feedback/90',
-    // State variants
-    loading: 'relative overflow-hidden after:absolute after:inset-0 after:animate-pulse after:bg-muted/50',
-    error: 'bg-error text-error-foreground hover:bg-error/90',
-    disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
-    // Interaction variants
-    typing: 'animate-pulse bg-muted text-muted-foreground',
-    sent: 'bg-success text-success-foreground hover:bg-success/90',
-  },
-  size: {
-    default: 'h-9 px-4 py-2',
-    sm: 'h-8 rounded-md px-3 text-xs',
-    lg: 'h-10 rounded-md px-8',
-    icon: 'h-9 w-9',
-    'icon-sm': 'h-8 w-8',
-    'icon-lg': 'h-10 w-10',
-    // Communication sizes
-    bubble: 'h-auto px-4 py-2 rounded-full',
-    'bubble-sm': 'h-auto px-3 py-1.5 text-xs rounded-full',
-  },
-} as const
-
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand disabled:pointer-events-none disabled:opacity-50',
   {
-    variants: buttonConfig,
+    variants: {
+      variant: {
+        primary: 'bg-brand text-brand-foreground shadow hover:bg-brand/90',
+        secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+        destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
+        outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        link: 'text-brand underline-offset-4 hover:underline',
+        emotion: 'rounded-full bg-emotion text-emotion-foreground hover:bg-emotion/90',
+        response: 'rounded-full bg-response text-response-foreground hover:bg-response/90',
+        feedback: 'rounded-full bg-feedback text-feedback-foreground hover:bg-feedback/90',
+        loading: 'relative overflow-hidden after:absolute after:inset-0 after:animate-pulse after:bg-muted/50',
+        error: 'bg-error text-error-foreground hover:bg-error/90',
+        disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
+        typing: 'animate-pulse bg-muted text-muted-foreground',
+        sent: 'bg-success text-success-foreground hover:bg-success/90',
+      },
+      size: {
+        default: 'h-9 px-4 py-2',
+        sm: 'h-8 rounded-md px-3 text-xs',
+        lg: 'h-10 rounded-md px-8',
+        icon: 'h-9 w-9',
+        'icon-sm': 'h-8 w-8',
+        'icon-lg': 'h-10 w-10',
+        bubble: 'h-auto px-4 py-2 rounded-full',
+        'bubble-sm': 'h-auto px-3 py-1.5 text-xs rounded-full',
+      }
+    },
     defaultVariants: {
       variant: 'primary',
       size: 'default',
@@ -50,8 +44,8 @@ const buttonVariants = cva(
   }
 )
 
-type ButtonVariant = keyof typeof buttonConfig.variant
-type ButtonSize = keyof typeof buttonConfig.size
+type ButtonVariant = VariantProps<typeof buttonVariants>['variant']
+type ButtonSize = VariantProps<typeof buttonVariants>['size']
 
 interface IconProps extends React.SVGAttributes<SVGElement> {
   size?: number
