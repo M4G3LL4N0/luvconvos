@@ -32,10 +32,20 @@ export function AuthProvider({
   const router = useRouter()
 
   useEffect(() => {
-    supabaseClient.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      setIsLoading(false)
-    })
+    supabaseClient.auth.getSession()
+      .then(({ data: { session }, error }) => {
+        if (error) {
+          console.error('Session error:', error)
+          setError(error.message)
+        }
+        setSession(session)
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        console.error('Auth initialization failed:', error)
+        setError('Failed to initialize authentication')
+        setIsLoading(false)
+      })
 
     const { data: { subscription } } = supabaseClient.auth.onAuthStateChange((_event, session) => {
       setSession(session)

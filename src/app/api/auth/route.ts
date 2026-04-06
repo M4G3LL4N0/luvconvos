@@ -5,8 +5,15 @@ import { cookies } from 'next/headers'
 export async function POST(request: Request) {
   const requestUrl = new URL(request.url)
   const formData = await request.formData()
-  const email = String(formData.get('email'))
-  const password = String(formData.get('password'))
+  const email = String(formData.get('email')).trim()
+  const password = String(formData.get('password')).trim()
+
+  if (!email || !password) {
+    return NextResponse.json(
+      { error: 'Email and password are required' },
+      { status: 400 }
+    )
+  }
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
 

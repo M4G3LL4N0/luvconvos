@@ -133,7 +133,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           buttonVariants({ variant, size }),
           className,
-          loading && 'relative overflow-hidden',
+          loading && 'relative overflow-hidden [&>span]:invisible',
           disabled && 'opacity-50 cursor-not-allowed'
         )}
         ref={ref}
@@ -144,7 +144,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         suppressHydrationWarning={isPending}
         {...props}
       >
-        <span className="flex items-center gap-2">
+        <>
+          {loading && (
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+            </span>
+          )}
+          <span className={cn('flex items-center gap-2', loading && 'invisible')}>
           {leftIcon && <span className="shrink-0">{leftIcon}</span>}
           {children}
           {rightIcon && <span className="shrink-0">{rightIcon}</span>}
