@@ -4,7 +4,36 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 import type { ButtonHTMLAttributes } from 'react'
 
-const buttonConfig = {
+type ButtonConfig = {
+  variant: {
+    primary: string
+    secondary: string
+    destructive: string
+    outline: string
+    ghost: string
+    link: string
+    emotion: string
+    response: string
+    feedback: string
+    loading: string
+    error: string
+    disabled: string
+    typing: string
+    sent: string
+  }
+  size: {
+    default: string
+    sm: string
+    lg: string
+    icon: string
+    'icon-sm': string
+    'icon-lg': string
+    bubble: string
+    'bubble-sm': string
+  }
+}
+
+const buttonConfig: ButtonConfig = {
   variant: {
     primary: 'bg-brand text-brand-foreground shadow hover:bg-brand/90',
     secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
@@ -53,11 +82,31 @@ export type ButtonVariant = VariantProps<typeof buttonVariants>['variant']
 export type ButtonSize = VariantProps<typeof buttonVariants>['size']
 
 export interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
   variant?: ButtonVariant
   size?: ButtonSize
+  /**
+   * @default false
+   */
+  disabled?: boolean
+  /**
+   * @default 'button'
+   */
+  type?: 'button' | 'submit' | 'reset'
+  /**
+   * Optional loading state
+   */
+  loading?: boolean
+  /**
+   * Optional left icon component
+   */
+  leftIcon?: React.ReactNode
+  /**
+   * Optional right icon component
+   */
+  rightIcon?: React.ReactNode
 }
 
 export type ButtonComponent = React.ForwardRefExoticComponent<
@@ -66,15 +115,19 @@ export type ButtonComponent = React.ForwardRefExoticComponent<
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ 
-    className, 
-    variant, 
-    size, 
-    asChild = false, 
+    className,
+    variant,
+    size,
+    asChild = false,
     type = 'button',
-    disabled,
+    disabled = false,
+    loading = false,
+    leftIcon,
+    rightIcon,
+    children,
     'aria-busy': ariaBusy,
-    'aria-live': ariaLive,
-    ...props 
+    'aria-live': ariaLive = 'polite',
+    ...props
   }, ref) => {
     const Comp = asChild ? Slot : 'button'
     const isPending = variant === 'loading' || ariaBusy === 'true'

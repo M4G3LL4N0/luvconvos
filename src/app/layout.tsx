@@ -13,7 +13,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+type MetadataProps = {
+  title: {
+    default: string
+    template: string
+  }
+  description: string
+  metadataBase: URL
+}
+
+export const metadata: Metadata & MetadataProps = {
   title: {
     default: "LuvConvos",
     template: "%s | LuvConvos"
@@ -22,11 +31,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"),
 }
 
+type RootLayoutProps = Readonly<{
+  children: ReactNode
+}>
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: ReactNode
-}>): ReactNode {
+}: RootLayoutProps): ReactNode {
   return (
     <html
       lang="en"
