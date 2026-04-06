@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Zap, Lock, Share2 } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Share2 } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
