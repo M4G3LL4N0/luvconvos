@@ -6,11 +6,16 @@ import { ThemeProvider } from './theme-provider'
 import { ErrorBoundary } from './error-boundary'
 import { Suspense } from 'react'
 import { useRouter } from 'next/navigation'
+import { AuthProvider } from './auth-provider'
+import { createClient } from '../../lib/supabase/client'
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const router = useRouter()
+  const supabaseClient = createClient()
+
   return (
-    <ThemeProvider
+    <AuthProvider supabaseClient={supabaseClient}>
+      <ThemeProvider
       attribute="class"
       defaultTheme="system"
       enableSystem

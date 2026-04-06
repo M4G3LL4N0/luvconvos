@@ -46,7 +46,12 @@ interface IconProps extends React.SVGAttributes<SVGElement> {
   size?: number
 }
 
-interface ButtonBaseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonBaseProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
+  /**
+   * Requires authentication before triggering onClick
+   * @default false
+   */
+  requireAuth?: boolean
   /**
    * Render as child component
    * @default false
@@ -106,7 +111,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         ref={ref}
         type={asChild ? undefined : type}
-        disabled={disabled || undefined}
+        disabled={disabled || loading || undefined}
         aria-busy={isPending ? 'true' : 'false'}
         aria-live={isPending ? 'polite' : undefined}
         suppressHydrationWarning={isPending}
