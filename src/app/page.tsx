@@ -23,12 +23,12 @@ export default function Home() {
         </p>
 
         <div className="z-20 mt-10 flex gap-4">
-          <Button size="lg" asChild>
+          <Button size="lg" variant="default" asChild>
             <Link href="/sign-up">
               Try Free <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
-          <Button variant="outline" size="lg" className="group" asChild>
+          <Button variant="outline" size="lg" className="group hover:bg-zinc-800" asChild>
             <Link href="/pricing">
               <Zap className="mr-2 h-4 w-4 group-hover:text-amber-400 transition-colors" />
               Get Pro
@@ -50,7 +50,7 @@ export default function Home() {
               <h3 className="text-xl font-semibold text-cyan-400 mb-2">Example Analysis</h3>
               <p className="text-zinc-300">See what our AI reveals about your communication:</p>
             </div>
-            <Button variant="ghost" size="sm" className="text-zinc-400 hover:text-cyan-400">
+            <Button variant="ghost" size="sm" className="text-zinc-400 hover:bg-zinc-700/50 hover:text-cyan-400">
               <Share2 className="mr-2 h-4 w-4" /> Share
             </Button>
           </div>
@@ -104,7 +104,7 @@ export default function Home() {
               <p className="text-sm text-zinc-400 mb-4">
                 Unlock deeper relationship patterns and communication analytics.
               </p>
-              <Button size="sm" variant="secondary" className="w-full">
+              <Button size="sm" variant="secondary" className="w-full hover:bg-zinc-700">
                 <Zap className="mr-2 h-4 w-4" />
                 Upgrade Now
               </Button>
