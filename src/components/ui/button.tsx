@@ -100,7 +100,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ...props
   }, ref) => {
     const Comp = asChild ? Slot : 'button'
-    const isPending = state === 'loading'
+    const isPending = loading
     
     return (
       <Comp
@@ -114,7 +114,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         type={asChild ? undefined : type}
         disabled={disabled || undefined}
         aria-busy={isPending ? 'true' : 'false'}
-        aria-live={isPending ? 'polite' : ariaLive}
+        aria-live={isPending ? 'polite' : undefined}
         suppressHydrationWarning={isPending}
         {...props}
       >
