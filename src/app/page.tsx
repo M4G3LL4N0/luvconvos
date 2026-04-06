@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Lock, Share2 } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -9,23 +9,29 @@ export default function Home() {
       <section className="container relative flex flex-col items-center justify-center px-4 py-32 text-center">
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent via-zinc-900/60 to-zinc-900" />
         
+        <div className="z-20 flex items-center gap-2 mb-4 px-4 py-2 bg-cyan-900/20 rounded-full border border-cyan-400/30">
+          <Sparkles className="h-4 w-4 text-cyan-400" />
+          <span className="text-sm font-medium text-cyan-300">Powered by real AI analysis</span>
+        </div>
+
         <h1 className="z-20 mx-auto max-w-4xl text-5xl font-bold leading-[1.1] tracking-tighter text-zinc-100 sm:text-6xl">
-          Practice the conversation <span className="text-cyan-400">before</span> it matters.
+          Master important conversations <span className="text-cyan-400">before</span> they happen
         </h1>
         
         <p className="z-20 mx-auto mt-6 max-w-xl text-lg leading-8 text-zinc-300">
-          LuvConvos helps you communicate better with people you care about by simulating real conversations while preserving your authentic voice.
+          Get AI-powered insights into how people actually respond to your communication style, with personalized improvements and simulations.
         </p>
 
         <div className="z-20 mt-10 flex gap-4">
           <Button size="lg" asChild>
             <Link href="/sign-up">
-              Get Started <ArrowRight className="ml-2 h-4 w-4" />
+              Try Free <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
-          <Button variant="outline" size="lg" asChild>
-            <Link href="/features">
-              Learn More
+          <Button variant="outline" size="lg" className="group" asChild>
+            <Link href="/pricing">
+              <Zap className="mr-2 h-4 w-4 group-hover:text-amber-400 transition-colors" />
+              Get Pro
             </Link>
           </Button>
         </div>
@@ -35,25 +41,75 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Value Props */}
-      <section className="container grid grid-cols-1 gap-12 px-4 py-24 md:grid-cols-3">
-        <div className="rounded-xl border border-zinc-700/50 bg-zinc-800/50 p-8 backdrop-blur-sm">
-          <h3 className="mb-4 text-xl font-semibold text-cyan-400">Reduce Emotional Misfires</h3>
-          <p className="text-zinc-400">
-            Test different phrasing and see how someone might actually respond before sending.
-          </p>
-        </div>
-        <div className="rounded-xl border border-zinc-700/50 bg-zinc-800/50 p-8 backdrop-blur-sm">
-          <h3 className="mb-4 text-xl font-semibold text-cyan-400">Preserve Your Voice</h3>
-          <p className="text-zinc-400">
-            Our AI adapts to your unique communication style rather than replacing it.
-          </p>
-        </div>
-        <div className="rounded-xl border border-zinc-700/50 bg-zinc-800/50 p-8 backdrop-blur-sm">
-          <h3 className="mb-4 text-xl font-semibold text-cyan-400">Data Privacy First</h3>
-          <p className="text-zinc-400">
-            Your conversations stay private. We never train on your personal data.
-          </p>
+      {/* Demo Insights */}
+      <section className="container relative px-4 py-16">
+        <div className="absolute inset-0 bg-gradient-to-r from-black from-10% via-black/40 via-50% to-black to-90% z-10" />
+        <div className="relative z-20 rounded-xl border border-zinc-700/50 bg-zinc-800/50 p-8 backdrop-blur-sm">
+          <div className="flex justify-between items-start">
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-400 mb-2">Example Analysis</h3>
+              <p className="text-zinc-300">See what our AI reveals about your communication:</p>
+            </div>
+            <Button variant="ghost" size="sm" className="text-zinc-400 hover:text-cyan-400">
+              <Share2 className="mr-2 h-4 w-4" /> Share
+            </Button>
+          </div>
+          
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            <div className="rounded-lg border border-zinc-700/50 p-6">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="h-2 w-2 rounded-full bg-cyan-400" />
+                <h4 className="font-medium text-zinc-100">Your Tone Profile</h4>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between mb-1">
+                    <span className="text-xs text-zinc-400">Warmth</span>
+                    <span className="text-xs text-zinc-300">72/100</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-zinc-700 rounded-full overflow-hidden">
+                    <div className="h-full bg-cyan-400 rounded-full" style={{ width: '72%' }} />
+                  </div>
+                </div>
+                {/* Additional metrics would go here */}
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-zinc-700/50 p-6">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="h-2 w-2 rounded-full bg-amber-400" />
+                <h4 className="font-medium text-zinc-100">What Works Best</h4>
+              </div>
+              <ul className="space-y-2 text-sm text-zinc-300">
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400">•</span> Asking open-ended questions
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400">•</span> Matching their response length
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400">•</span> Using positive reinforcement
+                </li>
+              </ul>
+            </div>
+
+            <div className="rounded-lg border border-zinc-700 bs50 bg-gradient-to-b from-zinc-900/50 to-zinc-800/30 p-6 relative overflow-hidden">
+              <div className="absolute top-0 right-0 px-2 py-1 bg-amber-900/50 text-xs text-amber-300 rounded-bl-lg">
+                Pro Feature
+              </div>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="h-2 w-2 rounded-full bg-violet-400" />
+                <h4 className="font-medium text-zinc-100">Advanced Insights</h4>
+              </div>
+              <p className="text-sm text-zinc-400 mb-4">
+                Unlock deeper relationship patterns and communication analytics.
+              </p>
+              <Button size="sm" variant="secondary" className="w-full">
+                <Zap className="mr-2 h-4 w-4" />
+                Upgrade Now
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
     </div>
