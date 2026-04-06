@@ -25,9 +25,6 @@ export const buttonVariants = cva(
         feedback: 'rounded-full bg-feedback text-feedback-foreground hover:bg-feedback/90',
         success: 'bg-success text-success-foreground hover:bg-success/90',
 
-        // State variants
-        loading: 'cursor-wait',
-        error: 'bg-error text-error-foreground hover:bg-error/90',
       },
       size: {
         default: 'h-9 px-4 py-2',
@@ -105,10 +102,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp
         className={cn(
-          buttonVariants({ variant, size }),
+          buttonVariants({ 
+            variant: isPending ? 'primary' : variant,
+            size 
+          }),
           className,
-          isPending && 'cursor-wait',
-          disabled && 'cursor-not-allowed',
+          disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
           loading && 'relative overflow-hidden'
         )}
         ref={ref}
@@ -119,12 +118,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         suppressHydrationWarning={isPending}
         {...props}
       >
-        {loading && (
-          <span className="absolute inset-0 flex items-center justify-center">
-            <span className="h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-          </span>
-        )}
-        <span className={cn('flex items-center gap-2', loading && 'opacity-0')}>
+        <span className="flex items-center gap-2">
           {leftIcon && <span className="shrink-0">{leftIcon}</span>}
           {children}
           {rightIcon && <span className="shrink-0">{rightIcon}</span>}
