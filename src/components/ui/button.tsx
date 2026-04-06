@@ -7,7 +7,7 @@ import { cn } from '../../lib/utils'
 import type { ButtonHTMLAttributes, RefAttributes } from 'react'
 
 export const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
@@ -19,10 +19,7 @@ export const buttonVariants = cva(
         ghost: 'hover:bg-accent hover:text-accent-foreground shadow-none',
         link: 'text-brand underline-offset-4 hover:underline shadow-none',
 
-        // Semantic variants (communication specific)
-        emotion: 'rounded-full bg-emotion text-emotion-foreground hover:bg-emotion/90',
-        response: 'rounded-full bg-response text-response-foreground hover:bg-response/90',
-        feedback: 'rounded-full bg-feedback text-feedback-foreground hover:bg-feedback/90',
+        // Semantic variants
         success: 'bg-success text-success-foreground hover:bg-success/90',
 
       },
@@ -102,13 +99,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp
         className={cn(
-          buttonVariants({ 
-            variant: isPending ? 'primary' : variant,
-            size 
-          }),
+          buttonVariants({ variant, size }),
           className,
-          disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
-          loading && 'relative overflow-hidden'
+          loading && 'relative overflow-hidden',
+          disabled && 'opacity-50'
         )}
         ref={ref}
         type={asChild ? undefined : type}
