@@ -25,8 +25,8 @@ import { Suspense, type ReactNode } from 'react'
 type RootLayoutProps = Readonly<{
   children: ReactNode
 }>
-import { ThemeProvider } from '@/components/theme-provider'
-import { ErrorBoundary } from '@/components/error-boundary'
+import { ThemeProvider } from '../../components/theme-provider'
+import { ErrorBoundary } from '../../components/error-boundary'
 
 export default function RootLayout({
   children,
