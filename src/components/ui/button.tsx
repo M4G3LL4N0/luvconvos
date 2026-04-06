@@ -4,6 +4,8 @@ import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
+import { useRouter } from 'next/navigation'
+import { useAuth } from '../../hooks/use-auth'
 import type { ButtonHTMLAttributes, RefAttributes } from 'react'
 
 export const buttonVariants = cva(
@@ -98,11 +100,24 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     disabled,
     ...props
   }, ref) => {
+    const router = useRouter()
+    const { isAuthenticated } = useAuth()
     const Comp = asChild ? Slot : 'button'
     const isPending = loading
     
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (props.requireAuth && !isAuthenticated) {
+        router.push('/login')
+        return
+      }
+      if (props.onClick) {
+        props.onClick(e)
+      }
+    }
+
     return (
       <Comp
+        onClick={handleClick}
         className={cn(
           buttonVariants({ variant, size }),
           className,
