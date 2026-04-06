@@ -13,16 +13,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-type MetadataProps = {
-  title: {
-    default: string
-    template: string
-  }
-  description: string
-  metadataBase: URL
-}
-
-export const metadata: Metadata & MetadataProps = {
+export const metadata: Metadata = {
   title: {
     default: "LuvConvos",
     template: "%s | LuvConvos"
@@ -35,7 +26,7 @@ type RootLayoutProps = Readonly<{
   children: ReactNode
 }>
 
-import { Suspense } from 'react'
+import { Suspense, type ReactNode } from 'react'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ErrorBoundary } from '@/components/error-boundary'
 
