@@ -6,34 +6,23 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
 import type { ButtonHTMLAttributes, RefAttributes } from 'react'
 
-type ButtonConfig = {
+type ButtonVariantTypes = 'primary' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link'
+type ButtonSizeTypes = 'default' | 'sm' | 'lg' | 'icon' | 'icon-sm' | 'icon-lg' | 'bubble' | 'bubble-sm'
+type ButtonStateTypes = 'loading' | 'disabled'
+
+const buttonConfig = {
   variant: {
-    primary: string
-    secondary: string
-    destructive: string
-    outline: string
-    ghost: string
-    link: string
-    emotion: string
-    response: string
-    feedback: string
-    loading: string
-    error: string
-    disabled: string
-    typing: string
-    sent: string
-  }
-  size: {
-    default: string
-    sm: string
-    lg: string
-    icon: string
-    'icon-sm': string
-    'icon-lg': string
-    bubble: string
-    'bubble-sm': string
-  }
-}
+    primary: 'bg-brand text-brand-foreground shadow hover:bg-brand/90',
+    secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+    destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
+    outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+    ghost: 'hover:bg-accent hover:text-accent-foreground',
+    link: 'text-brand underline-offset-4 hover:underline'
+  },
+  state: {
+    loading: 'relative overflow-hidden cursor-wait pointer-events-none',
+    disabled: 'opacity-50 cursor-not-allowed pointer-events-none'
+  },
 
 const buttonConfig: ButtonConfig = {
   variant: {
@@ -110,24 +99,32 @@ export interface ButtonProps
   rightIcon?: React.ReactElement<SVGElement | HTMLSpanElement>
 }
 
+interface ButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+  variant?: ButtonVariantTypes
+  size?: ButtonSizeTypes
+  state?: ButtonStateTypes
+  leftIcon?: React.ReactElement<IconProps>
+  rightIcon?: React.ReactElement<IconProps>
+}
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ 
     className,
-    variant,
-    size,
+    variant = 'primary',
+    size = 'default',
+    state,
     asChild = false,
     type = 'button',
-    disabled = false,
-    loading = false,
     leftIcon,
     rightIcon,
     children,
-    'aria-busy': ariaBusy,
-    'aria-live': ariaLive = 'polite',
     ...props
   }, ref) => {
     const Comp = asChild ? Slot : 'button'
-    const isPending = loading || variant === 'loading'
+    const isPending = state === 'loading'
     
     return (
       <Comp
