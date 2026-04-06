@@ -53,12 +53,16 @@ export type ButtonVariant = VariantProps<typeof buttonVariants>['variant']
 export type ButtonSize = VariantProps<typeof buttonVariants>['size']
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
   variant?: ButtonVariant
   size?: ButtonSize
 }
+
+export type ButtonComponent = React.ForwardRefExoticComponent<
+  ButtonProps & React.RefAttributes<HTMLButtonElement>
+>
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ 
@@ -95,4 +99,5 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button'
 
-export { Button }
+export { Button, type ButtonProps }
+export default Button
