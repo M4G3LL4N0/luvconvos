@@ -3,7 +3,6 @@
  * Component-specific variants and CVA configs belong inside their component files.
  */
 
-// Design system primitives only - no component-specific variants
 export const COLOR_SCALES = {
   zinc: [
     'zinc-50',

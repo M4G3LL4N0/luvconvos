@@ -50,11 +50,12 @@ export default function Home() {
               <h3 className="text-xl font-semibold text-cyan-400 mb-2">Example Analysis</h3>
               <p className="text-zinc-300">See what our AI reveals about your communication:</p>
             </div>
-            <Button 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              variant="ghost"
+              size="sm"
               className="text-zinc-400 hover:bg-zinc-700/50 hover:text-cyan-400"
-              disabled // Temporarily disabled until share functionality is implemented
+              disabled
+              aria-label="Share analysis"
             >
               <Share2 className="mr-2 h-4 w-4" /> Share
             </Button>
