@@ -77,8 +77,8 @@ const buttonVariants = cva(
   }
 )
 
-export type ButtonVariant = VariantProps<typeof buttonVariants>['variant']
-export type ButtonSize = VariantProps<typeof buttonVariants>['size']
+export type ButtonVariant = keyof typeof buttonConfig.variant
+export type ButtonSize = keyof typeof buttonConfig.size
 
 export interface ButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
@@ -97,7 +97,7 @@ export interface ButtonProps
   /**
    * @default false
    */
-  loading?: boolean
+  loading?: boolean | 'true' | 'false'
   /**
    * Optional left icon component
    */

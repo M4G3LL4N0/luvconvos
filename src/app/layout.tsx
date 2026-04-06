@@ -26,7 +26,9 @@ type RootLayoutProps = Readonly<{
   children: ReactNode
 }>
 import { ThemeProvider } from '../../components/theme-provider'
+import type { ThemeProviderProps } from '../../components/theme-provider'
 import { ErrorBoundary } from '../../components/error-boundary'
+import type { ErrorBoundaryProps } from '../../components/error-boundary'
 
 export default function RootLayout({
   children,
@@ -56,7 +58,11 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <ErrorBoundary>
-              <Suspense fallback={<div className="flex-1 flex items-center justify-center">Loading...</div>}>
+              <Suspense fallback={
+                <div className="flex-1 flex items-center justify-center">
+                  <span className="animate-pulse">Loading...</span>
+                </div>
+              }>
                 {children}
               </Suspense>
             </ErrorBoundary>
