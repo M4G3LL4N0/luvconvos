@@ -20,9 +20,12 @@ const buttonConfig = {
     response: 'bg-blue-100 text-blue-900 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-100 dark:hover:bg-blue-900/50',
     feedback: 'bg-purple-100 text-purple-900 hover:bg-purple-200 dark:bg-purple-900/30 dark:text-purple-100 dark:hover:bg-purple-900/50',
     // State variants
-    loading: 'opacity-75 cursor-wait',
+    loading: 'relative overflow-hidden after:absolute after:inset-0 after:animate-pulse after:bg-muted/50',
     error: 'bg-destructive/50 text-destructive-foreground hover:bg-destructive/70',
-    disabled: 'opacity-50 cursor-not-allowed',
+    disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
+    // New variants
+    typing: 'animate-pulse bg-muted text-muted-foreground',
+    sent: 'bg-green-100 text-green-900 dark:bg-green-900/30 dark:text-green-50',
   },
   size: {
     default: 'h-9 px-4 py-2',
@@ -60,14 +63,32 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, type = 'button', ...props }, ref) => {
+  ({ 
+    className, 
+    variant, 
+    size, 
+    asChild = false, 
+    type = 'button',
+    disabled,
+    'aria-busy': ariaBusy,
+    'aria-live': ariaLive,
+    ...props 
+  }, ref) => {
     const Comp = asChild ? Slot : 'button'
-
+    const isPending = variant === 'loading' || ariaBusy === 'true'
+    
     return (
       <Comp
-        className={cn(buttonVariantsInternal({ variant, size, className }))}
+        className={cn(
+          buttonVariantsInternal({ variant, size, className }),
+          isPending && 'cursor-wait',
+          disabled && 'cursor-not-allowed'
+        )}
         ref={ref}
         type={asChild ? undefined : type}
+        disabled={disabled || undefined}
+        aria-busy={isPending ? 'true' : undefined}
+        aria-live={isPending ? 'polite' : ariaLive}
         {...props}
       />
     )
