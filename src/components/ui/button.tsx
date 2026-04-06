@@ -6,26 +6,23 @@ import { cn } from '@/lib/utils'
 
 const buttonConfig = {
   variant: {
-    default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
-    destructive:
-      'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
-    outline:
-      'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-    secondary:
-      'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+    primary: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
+    secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+    destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
+    outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
     ghost: 'hover:bg-accent hover:text-accent-foreground',
     link: 'text-primary underline-offset-4 hover:underline',
     // Communication variants
-    emotion: 'rounded-full bg-emerald-100 text-emerald-900 hover:bg-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-100 dark:hover:bg-emerald-900/50',
-    response: 'bg-blue-100 text-blue-900 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-100 dark:hover:bg-blue-900/50',
-    feedback: 'bg-purple-100 text-purple-900 hover:bg-purple-200 dark:bg-purple-900/30 dark:text-purple-100 dark:hover:bg-purple-900/50',
+    emotion: 'rounded-full bg-emotion text-emotion-foreground hover:bg-emotion/90',
+    response: 'rounded-full bg-response text-response-foreground hover:bg-response/90',
+    feedback: 'rounded-full bg-feedback text-feedback-foreground hover:bg-feedback/90',
     // State variants
     loading: 'relative overflow-hidden after:absolute after:inset-0 after:animate-pulse after:bg-muted/50',
-    error: 'bg-destructive/50 text-destructive-foreground hover:bg-destructive/70',
+    error: 'bg-error text-error-foreground hover:bg-error/90',
     disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
-    // New variants
+    // Interaction variants
     typing: 'animate-pulse bg-muted text-muted-foreground',
-    sent: 'bg-green-100 text-green-900 dark:bg-green-900/30 dark:text-green-50',
+    sent: 'bg-success text-success-foreground hover:bg-success/90',
   },
   size: {
     default: 'h-9 px-4 py-2',
