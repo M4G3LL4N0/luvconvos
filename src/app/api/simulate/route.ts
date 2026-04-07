@@ -9,9 +9,38 @@ import {
   generatePersonalitySnapshot
 } from "@/lib/utils"
 import { getPersonalityProfile, learnFromInteraction } from "@/lib/supabase/schema"
+import { getUser } from "@/lib/supabase/data-helpers"
 
 export async function POST(request: Request) {
   const { messages, relationshipId } = await request.json()
+  const user = await getUser()
+  
+  if (!user) {
+    return NextResponse.json(
+      { error: "Authentication required" },
+      { status: 401 }
+    )
+  }
+
+  // Check free tier limits
+  if (user.subscription_status !== 'active') {
+    const { data: usage } = await supabase
+      .from('usage')
+      .select('simulations_today')
+      .eq('user_id', user.id)
+      .single()
+    
+    if (usage?.simulations_today >= 3) {
+      return NextResponse.json(
+        { 
+          error: "Free tier limit reached",
+          upgradeRequired: true 
+        },
+        { status: 402 }
+      )
+    }
+  }
+
   const personalityProfile = relationshipId ? await getPersonalityProfile(relationshipId) : null
   
   try {

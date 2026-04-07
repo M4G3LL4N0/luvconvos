@@ -49,8 +49,22 @@ export async function learnFromInteraction(
     response: string
     response_time: number
     emotional_intensity: number
-  }
+  },
+  userId: string
 ): Promise<void> {
+  const supabase = createClient()
+  
+  // Track usage
+  await supabase
+    .from('usage')
+    .upsert({
+      user_id: userId,
+      simulations_today: supabase.rpc('increment', { 
+        column: 'simulations_today',
+        value: 1 
+      }),
+      updated_at: new Date().toISOString()
+    })
   const supabase = createClient()
   const { data: profile } = await supabase
     .from('personality_profiles')

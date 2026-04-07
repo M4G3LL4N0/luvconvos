@@ -2,11 +2,13 @@ import { useState } from "react"
 import { Button } from "./ui/button"
 import { Textarea } from "./ui/textarea"
 import { SimulatorOutput } from "./SimulatorOutput"
+import { UpgradePrompt } from "../upgrade/UpgradePrompt"
 
 export function Simulator() {
   const [messages, setMessages] = useState([])
   const [analysis, setAnalysis] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
   const handleSimulate = async () => {
     setIsLoading(true)
@@ -18,6 +20,13 @@ export function Simulator() {
         },
         body: JSON.stringify({ messages })
       })
+      
+      if (response.status === 402) {
+        // Free tier limit reached
+        setShowUpgradeModal(true)
+        return
+      }
+
       const data = await response.json()
       setAnalysis(data)
     } catch (error) {
@@ -46,6 +55,10 @@ export function Simulator() {
       
       {analysis && (
         <SimulatorOutput analysis={analysis} />
+      )}
+      
+      {showUpgradeModal && (
+        <UpgradePrompt />
       )}
     </div>
   )
