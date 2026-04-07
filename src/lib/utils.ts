@@ -45,6 +45,46 @@ export function analyzePersonality(messages: any[]) {
   }
 }
 
+export function generatePersonalitySnapshot(messages: any[]): Partial<PersonalityProfile> {
+  const patterns = extractCommunicationPatterns(messages)
+  const personality = analyzePersonality(messages)
+  const attachmentStyle = detectAttachmentStyle(messages)
+  
+  return {
+    attachment_style: attachmentStyle,
+    emotional_triggers: detectEmotionalTriggers(messages),
+    preferred_tone: patterns.preferredTone,
+    conflict_pattern: personality.communication_style === 'direct' ? 'confrontational' : 'avoidant',
+    response_tendencies: {
+      time_of_day: analyzeTimePatterns(messages).timeBuckets,
+      message_length: patterns.preferredLength,
+      response_time: patterns.optimalTimes
+    }
+  }
+}
+
+export function detectEmotionalTriggers(messages: any[]): string[] {
+  const triggers = new Set<string>()
+  const emotionalWords = {
+    abandoned: 'abandonment',
+    ignored: 'neglect',
+    criticized: 'criticism',
+    rejected: 'rejection'
+  }
+
+  messages.forEach(msg => {
+    if (msg.emotional_intensity > 0.7) {
+      for (const [word, trigger] of Object.entries(emotionalWords)) {
+        if (msg.body.toLowerCase().includes(word)) {
+          triggers.add(trigger)
+        }
+      }
+    }
+  })
+
+  return Array.from(triggers)
+}
+
 export function generateDailyInsight(messages: any[]) {
   const patterns = extractCommunicationPatterns(messages)
   const personality = analyzePersonality(messages)

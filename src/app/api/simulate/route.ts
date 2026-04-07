@@ -1,15 +1,39 @@
 import { NextResponse } from "next/server"
-import { analyzePersonality, detectAttachmentStyle, extractCommunicationPatterns } from "@/lib/utils"
+import { 
+  analyzePersonality, 
+  detectAttachmentStyle, 
+  extractCommunicationPatterns,
+  analyzeTone,
+  analyzeClarity,
+  analyzeEmotionalWeight,
+  generatePersonalitySnapshot
+} from "@/lib/utils"
+import { getPersonalityProfile, learnFromInteraction } from "@/lib/supabase/schema"
 
 export async function POST(request: Request) {
-  const { messages } = await request.json()
+  const { messages, relationshipId } = await request.json()
+  const personalityProfile = relationshipId ? await getPersonalityProfile(relationshipId) : null
   
   try {
     const analysis = {
-      thinking: analyzeThoughtProcess(messages),
-      feeling: analyzeEmotionalState(messages),
-      whyItWorks: explainResponseEffectiveness(messages),
-      potentialIssues: identifyPotentialProblems(messages)
+      thinking: analyzeThoughtProcess(messages, personalityProfile),
+      feeling: analyzeEmotionalState(messages, personalityProfile),
+      whyItWorks: explainResponseEffectiveness(messages, personalityProfile),
+      potentialIssues: identifyPotentialProblems(messages, personalityProfile),
+      personalityInsights: personalityProfile ? {
+        attachmentStyle: personalityProfile.attachment_style,
+        emotionalTriggers: personalityProfile.emotional_triggers,
+        preferredTone: personalityProfile.preferred_tone
+      } : null
+    }
+
+    if (relationshipId) {
+      await learnFromInteraction(relationshipId, {
+        message: messages[messages.length - 2],
+        response: messages[messages.length - 1],
+        response_time: 0, // TODO: Calculate actual response time
+        emotional_intensity: 0.5 // TODO: Calculate emotional intensity
+      })
     }
 
     return NextResponse.json(analysis)
@@ -21,7 +45,7 @@ export async function POST(request: Request) {
   }
 }
 
-function analyzeThoughtProcess(messages: any[]) {
+function analyzeThoughtProcess(messages: any[], personalityProfile: any) {
   const lastMessage = messages[messages.length - 1]
   const patterns = extractCommunicationPatterns(messages)
   
@@ -32,7 +56,10 @@ function analyzeThoughtProcess(messages: any[]) {
   return "They're likely processing emotions and considering how to respond thoughtfully"
 }
 
-function analyzeEmotionalState(messages: any[]) {
+function analyzeEmotionalState(messages: any[], personalityProfile: any) {
+  if (personalityProfile?.attachment_style === 'anxious') {
+    return "They're likely feeling uncertain and seeking reassurance based on their attachment style"
+  }
   const attachmentStyle = detectAttachmentStyle(messages)
   const lastMessage = messages[messages.length - 1]
   
