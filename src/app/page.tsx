@@ -4,18 +4,18 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="relative flex min-h-screen flex-col overflow-hidden bg-gradient-to-b from-black via-zinc-900 to-zinc-800">
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-gradient-to-b from-blue-950/90 via-indigo-950/90 to-gray-950">
       {/* Hero Section */}
-      <section className="container relative flex flex-col items-center justify-center px-4 py-32 text-center">
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent via-zinc-900/60 to-zinc-900" />
+      <section className="container relative flex flex-col items-center justify-center px-4 py-40 text-center">
+        <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/10 via-transparent to-transparent" />
         
-        <div className="z-20 flex items-center gap-2 mb-4 px-4 py-2 bg-cyan-900/20 rounded-full border border-cyan-400/30">
-          <Sparkles className="h-4 w-4 text-cyan-400" />
-          <span className="text-sm font-medium text-cyan-300">Powered by real AI analysis</span>
+        <div className="z-20 flex items-center gap-2 mb-6 px-5 py-2.5 bg-gradient-to-r from-indigo-900/30 via-violet-900/30 to-pink-900/30 rounded-full border border-indigo-400/20 backdrop-blur-sm">
+          <Sparkles className="h-4 w-4 text-indigo-300" />
+          <span className="text-sm font-medium text-indigo-200">Powered by real AI analysis</span>
         </div>
 
-        <h1 className="z-20 mx-auto max-w-4xl text-5xl font-bold leading-[1.1] tracking-tighter text-zinc-100 sm:text-6xl">
-          Master important conversations <span className="text-cyan-400">before</span> they happen
+        <h1 className="z-20 mx-auto max-w-4xl text-6xl font-bold leading-[1.05] tracking-tight text-zinc-50 sm:text-7xl">
+          Master important conversations <span className="bg-gradient-to-r from-amber-400 to-pink-400 bg-clip-text text-transparent">before</span> they happen
         </h1>
         
         <p className="z-20 mx-auto mt-6 max-w-xl text-lg leading-8 text-zinc-300">
@@ -44,7 +44,7 @@ export default function Home() {
       {/* Demo Insights */}
       <section className="container relative px-4 py-16">
         <div className="absolute inset-0 bg-gradient-to-r from-black from-10% via-black/40 via-50% to-black to-90% z-10" />
-        <div className="relative z-20 rounded-xl border border-zinc-700/50 bg-zinc-800/50 p-8 backdrop-blur-sm">
+        <div className="relative z-20 premium-card p-8">
           <div className="flex justify-between items-start">
             <div>
               <h3 className="text-xl font-semibold text-cyan-400 mb-2">Example Analysis</h3>
