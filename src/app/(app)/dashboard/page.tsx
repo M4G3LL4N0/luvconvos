@@ -91,14 +91,7 @@ export default function DashboardPage() {
               />
             </div>
 
-            <Card className="border-white/10 bg-white/5 backdrop-blur-xl">
-              <CardHeader>
-                <CardTitle className="text-white">Today&apos;s Communication Insight</CardTitle>
-                <p className="text-sm text-white/60">
-                  Personalized guidance based on your recent interactions
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-4">
+            <DailyInsight shareable />
                 <div className="flex items-start gap-4 rounded-2xl border border-emerald-400/15 bg-emerald-400/5 p-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-400/10 text-emerald-200">
                     <Sparkles className="h-5 w-5" />
