@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Zap, Share2 } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Share2, MessageCircle, BarChart, Shield, Heart } from "lucide-react";
 import Link from "next/link";
+import { Card } from "@/components/ui/card";
 
 export default function Home() {
   return (
@@ -41,6 +42,210 @@ export default function Home() {
         </div>
       </section>
       
+      {/* How It Works Section */}
+      <section className="container relative px-4 py-24">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
+            How It Works
+          </h2>
+          <p className="mt-4 text-lg text-zinc-300">
+            Transform your communication in 4 simple steps
+          </p>
+        </div>
+
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <Card className="glass-panel p-6">
+            <div className="flex flex-col items-center text-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/10">
+                <MessageCircle className="h-6 w-6 text-indigo-400" />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-zinc-100">Import Conversations</h3>
+              <p className="mt-2 text-sm text-zinc-400">
+                Bring in your chat history to analyze communication patterns
+              </p>
+            </div>
+          </Card>
+
+          <Card className="glass-panel p-6">
+            <div className="flex flex-col items-center text-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-500/10">
+                <BarChart className="h-6 w-6 text-purple-400" />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-zinc-100">Understand Patterns</h3>
+              <p className="mt-2 text-sm text-zinc-400">
+                Discover emotional triggers, tone patterns, and response tendencies
+              </p>
+            </div>
+          </Card>
+
+          <Card className="glass-panel p-6">
+            <div className="flex flex-col items-center text-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-pink-500/10">
+                <Heart className="h-6 w-6 text-pink-400" />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-zinc-100">Simulate Responses</h3>
+              <p className="mt-2 text-sm text-zinc-400">
+                Test different approaches and see likely outcomes
+              </p>
+            </div>
+          </Card>
+
+          <Card className="glass-panel p-6">
+            <div className="flex flex-col items-center text-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-cyan-500/10">
+                <Shield className="h-6 w-6 text-cyan-400" />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-zinc-100">Improve Communication</h3>
+              <p className="mt-2 text-sm text-zinc-400">
+                Get personalized recommendations to strengthen your relationships
+              </p>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {/* What It Understands Section */}
+      <section className="container relative px-4 py-24 bg-gradient-to-b from-black/50 to-black/20">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
+            What It Understands
+          </h2>
+          <p className="mt-4 text-lg text-zinc-300">
+            Deep insights into the nuances of communication
+          </p>
+        </div>
+
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">Tone Analysis</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              Understand the emotional tone of messages and how it affects responses
+            </p>
+          </div>
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">Emotional Signals</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              Detect subtle emotional cues and patterns in conversations
+            </p>
+          </div>
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">Response Patterns</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              Identify how different approaches lead to different outcomes
+            </p>
+          </div>
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">Clarity vs Ambiguity</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              Measure how clear your communication is and where misunderstandings occur
+            </p>
+          </div>
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">Trigger Points</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              Discover what topics or approaches trigger positive or negative responses
+            </p>
+          </div>
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">Responsiveness</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              Analyze how quickly and effectively communication flows between parties
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Why It's Different Section */}
+      <section className="container relative px-4 py-24">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
+            Why It's Different
+          </h2>
+          <p className="mt-4 text-lg text-zinc-300">
+            A new approach to improving communication
+          </p>
+        </div>
+
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">Not a Chatbot</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              We analyze real conversations, not generate generic responses
+            </p>
+          </div>
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">Personalized Insights</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              Tailored recommendations based on your unique communication style
+            </p>
+          </div>
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">Preserves Your Voice</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              Helps you communicate better while staying true to yourself
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Privacy & Trust Section */}
+      <section className="container relative px-4 py-24 bg-gradient-to-b from-black/50 to-black/20">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
+            Privacy & Trust
+          </h2>
+          <p className="mt-4 text-lg text-zinc-300">
+            Your conversations are safe with us
+          </p>
+        </div>
+
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">Private by Design</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              End-to-end encryption ensures your data stays private
+            </p>
+          </div>
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">User-Controlled Data</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              You decide what to share and what to keep private
+            </p>
+          </div>
+          <div className="glass-panel p-6">
+            <h3 className="text-lg font-semibold text-zinc-100">Built for Clarity</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              Our goal is to help you communicate better, not manipulate
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="container relative px-4 py-24">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
+            Practice the conversation before it matters
+          </h2>
+          <p className="mt-4 text-lg text-zinc-300">
+            Join thousands of users improving their communication every day
+          </p>
+          <div className="mt-8 flex justify-center gap-4">
+            <Button size="lg" asChild variant="default">
+              <Link href="/sign-up">
+                Try Free <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button variant="secondary" size="lg" asChild>
+              <Link href="/pricing">
+                <Zap className="mr-2 h-4 w-4" />
+                Get Pro
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Demo Insights */}
       <section className="container relative px-4 py-16">
         <div className="absolute inset-0 bg-gradient-to-r from-black from-10% via-black/40 via-50% to-black to-90% z-10" />
