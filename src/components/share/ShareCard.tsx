@@ -1,7 +1,9 @@
 import { cn } from "@/lib/utils"
-import { Download, Share2 } from "lucide-react"
+import { Download, Share2, Sparkles } from "lucide-react"
 import { Button } from "./ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
+import { useRef } from "react"
+import html2canvas from "html2canvas"
 
 interface ShareCardProps {
   title: string
@@ -9,6 +11,9 @@ interface ShareCardProps {
   stats?: string[]
   relationshipName?: string
   className?: string
+  type?: "insight" | "comparison" | "pattern"
+  beforeText?: string
+  afterText?: string
 }
 
 export function ShareCard({
@@ -17,42 +22,102 @@ export function ShareCard({
   stats = [],
   relationshipName,
   className,
+  type = "insight",
+  beforeText,
+  afterText,
 }: ShareCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  const handleDownload = async () => {
+    if (!cardRef.current) return
+    
+    const canvas = await html2canvas(cardRef.current, {
+      backgroundColor: null,
+      scale: 2,
+    })
+    const link = document.createElement('a')
+    link.download = `luvconvos-${type}-${new Date().toISOString().slice(0, 10)}.png`
+    link.href = canvas.toDataURL('image/png')
+    link.click()
+  }
+
   return (
-    <Card className={cn("border-white/10 bg-white/5 backdrop-blur-xl", className)}>
+    <Card 
+      ref={cardRef}
+      className={cn(
+        "border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl",
+        "shadow-[0_8px_32px_rgba(0,0,0,0.2)]",
+        className
+      )}
+    >
       <CardHeader>
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-white">{title}</h3>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="text-white/60 hover:text-white">
+            <Sparkles className="h-4 w-4 text-indigo-300" />
+            <h3 className="text-lg font-semibold text-white">{title}</h3>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="text-white/60 hover:text-white hover:bg-white/10"
+              onClick={handleDownload}
+            >
               <Download className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-white/60 hover:text-white">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="text-white/60 hover:text-white hover:bg-white/10"
+            >
               <Share2 className="h-4 w-4" />
             </Button>
           </div>
         </div>
         {relationshipName && (
-          <p className="text-sm text-white/60">From your relationship with {relationshipName}</p>
+          <p className="text-sm text-white/60 mt-1">From your relationship with {relationshipName}</p>
         )}
       </CardHeader>
       <CardContent>
-        <div className="rounded-xl border border-white/10 bg-black/20 p-4">
-          <p className="text-white/80">{content}</p>
-          {stats.length > 0 && (
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              {stats.map((stat, i) => (
-                <div key={i} className="rounded-lg border border-white/10 p-2 text-center">
-                  <p className="text-xs text-white/60">{stat.split(':')[0]}</p>
-                  <p className="text-sm font-medium text-white">{stat.split(':')[1]}</p>
-                </div>
-              ))}
+        <div className="rounded-xl border border-white/10 bg-gradient-to-b from-black/20 to-black/10 p-4">
+          {type === "comparison" && beforeText && afterText ? (
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs font-medium text-white/60 mb-1">Before</p>
+                <p className="text-white/70 bg-white/5 rounded p-3">{beforeText}</p>
+              </div>
+              <div>
+                <p className="text-xs font-medium text-white/60 mb-1">Optimized</p>
+                <p className="text-white/90 bg-indigo-500/10 rounded p-3 border border-indigo-500/20">
+                  {afterText}
+                </p>
+              </div>
             </div>
+          ) : (
+            <>
+              <p className="text-white/80">{content}</p>
+              {stats.length > 0 && (
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  {stats.map((stat, i) => (
+                    <div 
+                      key={i} 
+                      className="rounded-lg border border-white/10 p-2 text-center bg-gradient-to-b from-white/5 to-transparent"
+                    >
+                      <p className="text-xs text-white/60">{stat.split(':')[0]}</p>
+                      <p className="text-sm font-medium text-white">{stat.split(':')[1]}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
           )}
         </div>
       </CardContent>
-      <CardFooter className="justify-center border-t border-white/10 py-3">
-        <p className="text-xs text-white/40">Shared via LuvConvos</p>
+      <CardFooter className="justify-center border-t border-white/10 py-3 bg-gradient-to-b from-transparent to-white/5">
+        <div className="flex items-center gap-1">
+          <Sparkles className="h-3 w-3 text-indigo-300" />
+          <p className="text-xs text-white/60">Shared via LuvConvos AI</p>
+        </div>
       </CardFooter>
     </Card>
   )
