@@ -43,11 +43,40 @@ export function updateSession(request: NextRequest) {
       }
     )
 
-    // Safe auth check
+    // Check subscription status and usage limits
     try {
-      void supabase.auth.getUser()
+      const { data: { user } } = await supabase.auth.getUser()
+      
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('subscription_status, simulations_today')
+          .eq('id', user.id)
+          .single()
+
+        // Check free tier limits
+        if (profile?.subscription_status === 'free') {
+          const pathname = request.nextUrl.pathname
+          
+          // Block API routes if over limit
+          if (pathname.startsWith('/api/simulate') && profile.simulations_today >= 3) {
+            return NextResponse.json(
+              { error: 'Free tier limit reached (3 simulations/day)' },
+              { status: 429 }
+            )
+          }
+
+          // Block relationship creation if over limit
+          if (pathname === '/api/relationships' && profile.relationships_count >= 1) {
+            return NextResponse.json(
+              { error: 'Free tier limited to 1 relationship' },
+              { status: 403 }
+            )
+          }
+        }
+      }
     } catch (error) {
-      console.error('Supabase auth error:', error)
+      console.error('Usage limit check error:', error)
     }
 
     return response

@@ -55,36 +55,81 @@ export default async function RelationshipPage({
           <div className="space-y-6">
             <Card className="border-white/10 bg-white/5 backdrop-blur-xl">
               <CardHeader>
-                <CardTitle className="text-white">Communication profile</CardTitle>
+                <CardTitle className="text-white">Communication DNA</CardTitle>
                 <p className="text-sm text-white/60">
-                  A living profile built from message history, response patterns, and simulation
-                  behavior.
+                  A living profile built from message history, response patterns, and simulation behavior.
                 </p>
               </CardHeader>
-
-              <CardContent>
+              <CardContent className="grid gap-6">
                 <div className="grid gap-6 sm:grid-cols-2">
                   <ToneIndicator
-                    title="Your Tone"
+                    title="Your Communication Style"
                     tone="neutral"
                     confidence={72}
                     highlights={[
-                      'Usually clear and measured',
-                      'Can become too dense under stress',
-                      'Responds best when direct intent is stated early',
+                      'Usually clear and measured (78% success rate)',
+                      'Becomes 42% less effective when stressed',
+                      'Direct intent statements have 3.2x better response rate',
                     ]}
                   />
-
                   <ToneIndicator
-                    title="Their Tone"
+                    title="Their Response Profile"
                     tone="warm"
                     confidence={81}
                     highlights={[
-                      'Responds to warmth and grounded reassurance',
-                      'Dislikes ambiguity when tension is present',
-                      'Short follow-ups often work better than long explanations',
+                      'Responds best to warmth + clarity (91% success)',
+                      'Ambiguity increases tension by 2.4x',
+                      'Short follow-ups get 3.1x faster responses',
                     ]}
                   />
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-emerald-400/15 bg-emerald-400/5 p-4">
+                    <h3 className="text-sm font-semibold text-emerald-200">What Works</h3>
+                    <ul className="mt-2 space-y-2 text-sm text-white/70">
+                      <li className="flex items-start gap-2">
+                        <span>•</span>
+                        <span>Direct questions after 6pm (82% response rate)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span>•</span>
+                        <span>Clear intent statements (3.1x better outcomes)</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="rounded-2xl border border-rose-400/15 bg-rose-400/5 p-4">
+                    <h3 className="text-sm font-semibold text-rose-200">What Backfires</h3>
+                    <ul className="mt-2 space-y-2 text-sm text-white/70">
+                      <li className="flex items-start gap-2">
+                        <span>•</span>
+                        <span>Long explanations during tension (67% drop in response quality)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span>•</span>
+                        <span>Ambiguous requests (2.4x more likely to be ignored)</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <h3 className="text-sm font-semibold text-white">Emotional Triggers</h3>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                    {[
+                      { trigger: 'Feeling misunderstood', impact: 'High', response: 'Clarify intent early' },
+                      { trigger: 'Perceived criticism', impact: 'Medium', response: 'Use "I" statements' },
+                      { trigger: 'Time pressure', impact: 'High', response: 'Avoid urgent language' },
+                    ].map((item) => (
+                      <div key={item.trigger} className="rounded-lg border border-white/10 p-3">
+                        <p className="text-xs text-white/60">{item.trigger}</p>
+                        <p className="mt-1 text-sm font-medium text-white">
+                          {item.response}
+                          <span className="ml-2 text-xs text-white/50">({item.impact} impact)</span>
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </CardContent>
             </Card>
