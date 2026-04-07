@@ -1,102 +1,91 @@
-import { Card } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { 
-  MessageSquare,
-  AlertCircle,
-  TrendingUp,
-  MoreHorizontal 
-} from "lucide-react"
+import Link from 'next/link'
+import { ArrowUpRight, Heart, MessageSquare, Signal } from 'lucide-react'
 
-interface RelationshipCardProps {
-  id: string
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
+
+export type RelationshipStatus =
+  | 'active'
+  | 'cooling'
+  | 'new'
+  | 'paused'
+  | 'needs follow up'
+
+export type RelationshipCardProps = {
+  id?: string
   name: string
-  status: 'active' | 'needs follow up' | 'at risk'
+  status: RelationshipStatus
   lastContact: string
   communicationScore: number
-  attachmentStyle?: 'avoidant' | 'anxious' | 'secure' | 'mixed'
-  topTriggers?: string[]
-  optimalContactTimes?: string[]
+  relationshipType?: string
 }
 
-export function RelationshipCard({ 
-  name, 
-  status, 
-  lastContact, 
-  communicationScore
+const statusStyles: Record<RelationshipStatus, string> = {
+  active: 'bg-emerald-500/10 text-emerald-200 border-emerald-400/20',
+  cooling: 'bg-amber-500/10 text-amber-200 border-amber-400/20',
+  new: 'bg-sky-500/10 text-sky-200 border-sky-400/20',
+  paused: 'bg-white/10 text-white/70 border-white/15',
+  'needs follow up': 'bg-orange-500/10 text-orange-200 border-orange-400/20',
+}
+
+export function RelationshipCard({
+  id,
+  name,
+  status,
+  lastContact,
+  communicationScore,
+  relationshipType = 'Relationship',
 }: RelationshipCardProps) {
-  const statusMap = {
-    'active': {
-      icon: <TrendingUp className="h-4 w-4 text-emerald-400" />,
-      bg: 'bg-emerald-500/10',
-      text: 'text-emerald-400'
-    },
-    'needs follow up': {
-      icon: <AlertCircle className="h-4 w-4 text-amber-400" />,
-      bg: 'bg-amber-500/10',
-      text: 'text-amber-400'
-    },
-    'at risk': {
-      icon: <AlertCircle className="h-4 w-4 text-red-400" />,
-      bg: 'bg-red-500/10',
-      text: 'text-red-400'
-    }
-  }
+  const href = id ? `/relationships/${id}` : '/relationships'
 
   return (
-    <Card className="group hover:border-primary/50 transition-colors">
-      <div className="p-4">
-        <div className="flex justify-between items-start">
-          <div className="flex items-center gap-3">
-            <Avatar className="h-10 w-10">
-              <AvatarImage src={`/avatars/${name.toLowerCase().replace(' ', '-')}.jpg`} />
-              <AvatarFallback>{name.slice(0, 2)}</AvatarFallback>
-            </Avatar>
-            <div>
-              <h3 className="font-semibold">{name}</h3>
-              <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs ${statusMap[status].bg} ${statusMap[status].text}`}>
-                {statusMap[status].icon}
-                <span className="ml-1 capitalize">{status}</span>
+    <Link href={href} className="group block">
+      <Card className="overflow-hidden border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.07] hover:shadow-[0_24px_80px_rgba(15,23,42,0.35)]">
+        <CardContent className="p-5">
+          <div className="mb-5 flex items-start justify-between gap-4">
+            <div className="flex items-start gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400/20 via-pink-400/15 to-violet-500/20 text-white ring-1 ring-white/10">
+                <Heart className="h-5 w-5" />
+              </div>
+
+              <div>
+                <p className="text-base font-semibold text-white">{name}</p>
+                <p className="mt-1 text-sm text-white/55">{relationshipType}</p>
               </div>
             </div>
-          </div>
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground"
-          >
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-4">
-          <div>
-            <p className="text-sm text-muted-foreground">Last Contact</p>
-            <p className="font-medium">{lastContact}</p>
+            <ArrowUpRight className="h-5 w-5 text-white/35 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white/70" />
           </div>
-          <div>
-            <p className="text-sm text-muted-foreground">Communication Score</p>
-            <div className="flex items-center gap-2">
-              <div className="relative h-2 flex-1 rounded-full bg-muted overflow-hidden">
-                <div 
-                  className="absolute h-full rounded-full bg-gradient-to-r from-indigo-400 to-blue-400"
-                  style={{ width: `${communicationScore}%` }}
-                />
+
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <Badge className={cn('border', statusStyles[status])}>
+              {status.charAt(0).toUpperCase() + status.slice(1)}
+            </Badge>
+            <Badge className="border-white/10 bg-white/8 text-white/70 hover:bg-white/8">
+              <MessageSquare className="mr-1 h-3.5 w-3.5" />
+              {lastContact}
+            </Badge>
+          </div>
+
+          <div className="rounded-2xl border border-white/8 bg-black/20 p-4">
+            <div className="mb-2 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <Signal className="h-4 w-4 text-white/55" />
+                <span className="text-sm text-white/65">Communication score</span>
               </div>
-              <span className="text-sm font-medium">{communicationScore}</span>
+              <span className="text-sm font-semibold text-white">{communicationScore}%</span>
+            </div>
+
+            <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/10">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-sky-400 via-violet-400 to-orange-400 transition-all"
+                style={{ width: `${Math.max(0, Math.min(100, communicationScore))}%` }}
+              />
             </div>
           </div>
-        </div>
-
-        <div className="mt-4 pt-4 border-t border-border">
-          <Button variant="outline" size="sm" className="w-full" asChild>
-            <a href={`/relationships/${name.toLowerCase().replace(' ', '-')}`}>
-              <MessageSquare className="mr-2 h-4 w-4" />
-              View Relationship
-            </a>
-          </Button>
-        </div>
-      </div>
-    </Card>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }
