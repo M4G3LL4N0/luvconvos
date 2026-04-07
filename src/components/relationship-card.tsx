@@ -9,10 +9,14 @@ import {
 } from "lucide-react"
 
 interface RelationshipCardProps {
+  id: string
   name: string
   status: 'active' | 'needs follow up' | 'at risk'
   lastContact: string
   communicationScore: number
+  attachmentStyle?: 'avoidant' | 'anxious' | 'secure' | 'mixed'
+  topTriggers?: string[]
+  optimalContactTimes?: string[]
 }
 
 export function RelationshipCard({ 

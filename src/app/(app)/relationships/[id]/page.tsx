@@ -14,6 +14,8 @@ import { Badge } from '@/components/ui/badge'
 import { RelationshipHeader } from '@/components/relationship-header'
 import { ToneIndicator } from '@/components/tone-indicator'
 import { InsightsPanel } from '@/components/insights-panel'
+import { AttachmentStyleIndicator } from '@/components/attachment-style-indicator'
+import { getRelationship } from '@/lib/supabase/data-helpers'
 
 export default async function RelationshipPage({
   params,

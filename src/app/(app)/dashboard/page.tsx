@@ -46,6 +46,23 @@ export default function DashboardPage() {
         </div>
       </section>
 
+      {/* Daily Insight */}
+      <Card className="p-6 border-emerald-500/20 bg-emerald-500/5">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400">
+            <Sparkles className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="font-semibold">Today's Communication Insight</h3>
+            <p className="text-sm text-muted-foreground">
+              {relationship.optimalContactTimes?.includes('morning') 
+                ? "They respond best to direct questions in the morning"
+                : "Evening messages tend to get more thoughtful responses"}
+            </p>
+          </div>
+        </div>
+      </Card>
+
       {/* Analytics & Quick Actions */}
       <div className="grid gap-4 md:grid-cols-3">
         {/* Recent Simulations */}
