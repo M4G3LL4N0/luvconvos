@@ -93,14 +93,16 @@ export default function DashboardPage() {
 
             <Card className="border-white/10 bg-white/5 backdrop-blur-xl">
               <CardHeader>
-                <CardTitle className="text-white">Today&apos;s communication insight</CardTitle>
+                <CardTitle className="text-white">Today&apos;s Communication Insight</CardTitle>
+                <p className="text-sm text-white/60">
+                  Personalized guidance based on your recent interactions
+                </p>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <div className="flex items-start gap-4 rounded-2xl border border-emerald-400/15 bg-emerald-400/5 p-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-400/10 text-emerald-200">
                     <Sparkles className="h-5 w-5" />
                   </div>
-
                   <div>
                     <h3 className="font-semibold text-white">Lead with clarity before emotion</h3>
                     <p className="mt-1 text-sm leading-7 text-white/70">
@@ -109,6 +111,33 @@ export default function DashboardPage() {
                     </p>
                   </div>
                 </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                    <p className="text-xs uppercase tracking-[0.18em] text-white/45">
+                      Best Performing Strategy
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-white/70">
+                      Short, direct questions with clear intent
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                    <p className="text-xs uppercase tracking-[0.18em] text-white/45">
+                      What to Avoid
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-white/70">
+                      Long explanations when tension is present
+                    </p>
+                  </div>
+                </div>
+
+                <Button
+                  variant="outline"
+                  className="w-full border-white/15 bg-white/5 text-white hover:bg-white/10"
+                >
+                  <Sparkles className="mr-2 h-4 w-4" />
+                  Generate New Insight
+                </Button>
               </CardContent>
             </Card>
 

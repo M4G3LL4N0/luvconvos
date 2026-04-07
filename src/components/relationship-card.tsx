@@ -68,20 +68,37 @@ export function RelationshipCard({
             </Badge>
           </div>
 
-          <div className="rounded-2xl border border-white/8 bg-black/20 p-4">
-            <div className="mb-2 flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2">
-                <Signal className="h-4 w-4 text-white/55" />
-                <span className="text-sm text-white/65">Communication score</span>
+          <div className="space-y-4">
+            <div className="rounded-2xl border border-white/8 bg-black/20 p-4">
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <Signal className="h-4 w-4 text-white/55" />
+                  <span className="text-sm text-white/65">Communication score</span>
+                </div>
+                <span className="text-sm font-semibold text-white">{communicationScore}%</span>
               </div>
-              <span className="text-sm font-semibold text-white">{communicationScore}%</span>
+              <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-sky-400 via-violet-400 to-orange-400 transition-all"
+                  style={{ width: `${Math.max(0, Math.min(100, communicationScore))}%` }}
+                />
+              </div>
             </div>
 
-            <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/10">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-sky-400 via-violet-400 to-orange-400 transition-all"
-                style={{ width: `${Math.max(0, Math.min(100, communicationScore))}%` }}
-              />
+            <div className="rounded-2xl border border-white/8 bg-black/20 p-4">
+              <div className="flex items-center gap-2">
+                <Heart className="h-4 w-4 text-white/55" />
+                <span className="text-sm text-white/65">Attachment Style</span>
+              </div>
+              <div className="mt-2 flex items-center gap-2">
+                <div className="h-2 w-full rounded-full bg-white/10">
+                  <div
+                    className="h-2 rounded-full bg-emerald-400"
+                    style={{ width: '75%' }}
+                  />
+                </div>
+                <span className="text-sm font-semibold text-white">Secure</span>
+              </div>
             </div>
           </div>
         </CardContent>

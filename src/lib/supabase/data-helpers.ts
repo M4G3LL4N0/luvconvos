@@ -10,12 +10,31 @@ interface PersonModel {
     time_of_day: Record<string, number>
     message_length: Record<string, number>
     conflict_resolution: string[]
+    preferred_tone: string
+    emotional_weight: Record<string, number>
   }
   conflict_behavior: string[]
   trust_signals: string[]
   communication_score: number
   last_contact: string
   status: 'active' | 'needs follow up' | 'at risk'
+  personality_profile: {
+    core_values: string[]
+    decision_making_style: 'rational' | 'emotional' | 'intuitive'
+    stress_response: 'fight' | 'flight' | 'freeze'
+    love_language: string[]
+    communication_style: 'direct' | 'indirect' | 'passive' | 'assertive'
+  }
+  insights: {
+    daily_insight: string
+    last_updated: string
+    patterns: {
+      best_performing_messages: string[]
+      worst_performing_messages: string[]
+      optimal_times: string[]
+      tone_preferences: string[]
+    }
+  }
 }
 
 export async function getSession() {
