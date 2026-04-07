@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils"
-import { Download, Share2, Sparkles } from "lucide-react"
+import { Download, Share2, Sparkles, MessageCircle, HeartPulse } from "lucide-react"
 import { Button } from "./ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
 import { useRef } from "react"
 import html2canvas from "html2canvas"
+import { Badge } from "./ui/badge"
 
 interface ShareCardProps {
   title: string
@@ -11,9 +12,11 @@ interface ShareCardProps {
   stats?: string[]
   relationshipName?: string
   className?: string
-  type?: "insight" | "comparison" | "pattern"
+  type?: "insight" | "comparison" | "pattern" | "relationship"
   beforeText?: string
   afterText?: string
+  status?: "active" | "cooling" | "new" | "paused"
+  score?: number
 }
 
 export function ShareCard({
@@ -41,15 +44,30 @@ export function ShareCard({
     link.click()
   }
 
+  const getIcon = () => {
+    switch(type) {
+      case 'relationship': return <HeartPulse className="h-4 w-4 text-pink-300" />
+      case 'comparison': return <MessageCircle className="h-4 w-4 text-blue-300" />
+      default: return <Sparkles className="h-4 w-4 text-indigo-300" />
+    }
+  }
+
   return (
     <Card 
       ref={cardRef}
       className={cn(
         "border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl",
-        "shadow-[0_8px_32px_rgba(0,0,0,0.2)]",
+        "shadow-[0_8px_32px_rgba(0,0,0,0.2)] relative",
         className
       )}
     >
+      {status && (
+        <div className="absolute top-4 right-4">
+          <Badge variant={status === 'active' ? 'default' : 'secondary'}>
+            {status}
+          </Badge>
+        </div>
+      )}
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
