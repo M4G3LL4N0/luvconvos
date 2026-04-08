@@ -5,34 +5,34 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-type ToneLabel = 'warm' | 'neutral' | 'cold' | 'direct' | 'playful' | 'intense'
+export type ToneLabel = 'warm' | 'neutral' | 'cold' | 'direct' | 'playful' | 'intense'
 
-type ToneAnalysis = {
+export type ToneAnalysis = {
   label: ToneLabel
   score: number
   explanation: string
 }
 
-type ClarityAnalysis = {
+export type ClarityAnalysis = {
   score: number
   explanation: string
   issues: string[]
 }
 
-type EmotionalWeightAnalysis = {
+export type EmotionalWeightAnalysis = {
   score: number
   explanation: string
   intensity: 'low' | 'medium' | 'high'
 }
 
-type AttachmentStyle =
+export type AttachmentStyle =
   | 'secure'
   | 'anxious'
   | 'avoidant'
   | 'mixed'
   | 'undetermined'
 
-type CommunicationPattern = {
+export type CommunicationPattern = {
   averageMessageLength: number
   questionRate: number
   emojiRate: number
@@ -41,14 +41,14 @@ type CommunicationPattern = {
   summary: string
 }
 
-type PersonalitySnapshot = {
+export type PersonalitySnapshot = {
   attachmentStyle: AttachmentStyle
   communicationStyle: string
   emotionalBaseline: string
   summary: string
 }
 
-type PersonalityAnalysis = {
+export type PersonalityAnalysis = {
   attachmentStyle: AttachmentStyle
   communicationPatterns: CommunicationPattern
   tone: ToneAnalysis
