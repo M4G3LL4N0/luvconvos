@@ -140,7 +140,7 @@
   }
   
   .premium-card {
-    @apply glass-panel bg-gradient-to-b from-gray-900/40 via-gray-900/30 to-gray-900/20;
+    @apply rounded-[28px] border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_20px_80px_rgba(15,23,42,0.45)] bg-gradient-to-b from-gray-900/40 via-gray-900/30 to-gray-900/20;
     transition: all 0.3s ease;
   }
 }
