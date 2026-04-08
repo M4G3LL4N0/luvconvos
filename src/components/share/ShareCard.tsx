@@ -1,21 +1,24 @@
 import React, { useRef, ReactNode } from "react"
 import { cn } from "@/lib/utils"
 import { Download, Share2, MessageCircle, HeartPulse, Sparkles } from "lucide-react"
+import dynamic from "next/dynamic"
+import { Badge } from "./ui/badge"
 import { Button } from "./ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
-import dynamic from "next/dynamic"
 const html2canvas = dynamic(() => import("html2canvas"), { ssr: false })
-import { Badge } from "./ui/badge"
-import { Button, ButtonProps } from "./ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
 
 type StatusType = "active" | "cooling" | "new" | "paused"
 type CardType = "insight" | "comparison" | "pattern" | "relationship"
 
+interface StatItem {
+  label: string
+  value: string
+}
+
 interface ShareCardProps {
   title: string
   content: string
-  stats?: string[]
+  stats?: StatItem[]
   relationshipName?: string
   className?: string
   type?: CardType
@@ -129,8 +132,8 @@ export function ShareCard({
                       key={i} 
                       className="rounded-lg border border-white/10 p-2 text-center bg-gradient-to-b from-white/5 to-transparent"
                     >
-                      <p className="text-xs text-white/60">{stat.split(':')[0]}</p>
-                      <p className="text-sm font-medium text-white">{stat.split(':')[1]}</p>
+                      <p className="text-xs text-white/60">{stat.label}</p>
+                      <p className="text-sm font-medium text-white">{stat.value}</p>
                     </div>
                   ))}
                 </div>
