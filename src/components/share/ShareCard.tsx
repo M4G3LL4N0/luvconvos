@@ -5,9 +5,11 @@ import { Button } from "./ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
 import dynamic from "next/dynamic"
 const html2canvas = dynamic(() => import("html2canvas"), { ssr: false })
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "./ui/badge"
+import { Button, ButtonProps } from "./ui/button"
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
 
-type StatusType = "active" | "cooling" | "new" | "paused" | "default" | "secondary"
+type StatusType = "active" | "cooling" | "new" | "paused"
 type CardType = "insight" | "comparison" | "pattern" | "relationship"
 
 interface ShareCardProps {
@@ -69,7 +71,7 @@ export function ShareCard({
     >
       {status && (
         <div className="absolute top-4 right-4">
-          <Badge variant={status as 'default' | 'secondary'}>
+          <Badge variant={status === 'active' ? 'default' : 'secondary'}>
             {status}
           </Badge>
         </div>
