@@ -2,7 +2,7 @@ import React, { useRef, ReactNode } from "react"
 import { cn } from "@/lib/utils"
 import { Download, Share2, MessageCircle, HeartPulse, Sparkles } from "lucide-react"
 import dynamic from "next/dynamic"
-import { Badge, BadgeVariant } from "./ui/badge"
+import { Badge, BadgeVariant } from "@/components/ui/badge"
 import { Button } from "./ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
 const html2canvas = dynamic(() => import("html2canvas"), { 
