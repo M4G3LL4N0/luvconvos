@@ -1,10 +1,14 @@
+import React, { useRef, ReactNode } from "react"
 import { cn } from "@/lib/utils"
-import { Download, Share2, Sparkles, MessageCircle, HeartPulse } from "lucide-react"
+import { Download, Share2, MessageCircle, HeartPulse, Sparkles } from "lucide-react"
 import { Button } from "./ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
-import { useRef } from "react"
-import html2canvas from "html2canvas"
-import { Badge } from "./ui/badge"
+import dynamic from "next/dynamic"
+const html2canvas = dynamic(() => import("html2canvas"), { ssr: false })
+import { Badge } from "@/components/ui/badge"
+
+type StatusType = "active" | "cooling" | "new" | "paused" | "default" | "secondary"
+type CardType = "insight" | "comparison" | "pattern" | "relationship"
 
 interface ShareCardProps {
   title: string
@@ -12,10 +16,10 @@ interface ShareCardProps {
   stats?: string[]
   relationshipName?: string
   className?: string
-  type?: "insight" | "comparison" | "pattern" | "relationship"
+  type?: CardType
   beforeText?: string
   afterText?: string
-  status?: "active" | "cooling" | "new" | "paused"
+  status?: StatusType
   score?: number
 }
 
@@ -28,6 +32,8 @@ export function ShareCard({
   type = "insight",
   beforeText,
   afterText,
+  status,
+  score,
 }: ShareCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
 
@@ -63,7 +69,7 @@ export function ShareCard({
     >
       {status && (
         <div className="absolute top-4 right-4">
-          <Badge variant={status === 'active' ? 'default' : 'secondary'}>
+          <Badge variant={status as 'default' | 'secondary'}>
             {status}
           </Badge>
         </div>
@@ -71,7 +77,7 @@ export function ShareCard({
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-indigo-300" />
+            {getIcon()}
             <h3 className="text-lg font-semibold text-white">{title}</h3>
           </div>
           <div className="flex items-center gap-2">
@@ -135,6 +141,11 @@ export function ShareCard({
         <div className="flex items-center gap-1">
           <Sparkles className="h-3 w-3 text-indigo-300" />
           <p className="text-xs text-white/60">Shared via LuvConvos AI</p>
+          {typeof score === 'number' && !isNaN(score) && (
+            <div className="ml-2 text-xs text-white/60">
+              Score: <span className="text-white">{Math.round(score)}</span>
+            </div>
+          )}
         </div>
       </CardFooter>
     </Card>
