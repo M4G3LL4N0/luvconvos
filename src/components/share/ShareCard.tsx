@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils"
 import { Download, Share2, MessageCircle, HeartPulse, Sparkles } from "lucide-react"
 import dynamic from "next/dynamic"
 import { Badge, BadgeVariant } from "@/components/ui/badge"
-import { Button } from "./ui/button"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
 const html2canvas = dynamic(() => import("html2canvas"), { 
   ssr: false,
@@ -74,7 +74,9 @@ export function ShareCard({
       ref={cardRef}
       className={cn(
         "border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl",
-        "shadow-[0_8px_32px_rgba(0,0,0,0.2)] relative",
+        "shadow-[0_8px_32px_rgba(0,0,0,0.2)] relative overflow-hidden",
+        "group hover:shadow-[0_12px_48px_rgba(99,102,241,0.15)] transition-all duration-300",
+        "premium-card",
         className
       )}
     >
@@ -95,7 +97,7 @@ export function ShareCard({
             <Button 
               variant="ghost" 
               size="icon" 
-              className="text-white/60 hover:text-white hover:bg-white/10"
+              className="text-white/60 hover:text-white hover:bg-white/10 transition-colors"
               onClick={handleDownload}
             >
               <Download className="h-4 w-4" />
@@ -148,7 +150,7 @@ export function ShareCard({
           )}
         </div>
       </CardContent>
-      <CardFooter className="justify-center border-t border-white/10 py-3 bg-gradient-to-b from-transparent to-white/5">
+      <CardFooter className="justify-center border-t border-white/10 py-3 bg-gradient-to-b from-transparent to-white/[0.03]">
         <div className="flex items-center gap-1">
           <Sparkles className="h-3 w-3 text-indigo-300" />
           <p className="text-xs text-white/60">Shared via LuvConvos AI</p>
