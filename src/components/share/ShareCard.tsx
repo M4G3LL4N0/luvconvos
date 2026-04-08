@@ -2,20 +2,26 @@ import React, { useRef, ReactNode } from "react"
 import { cn } from "@/lib/utils"
 import { Download, Share2, MessageCircle, HeartPulse, Sparkles } from "lucide-react"
 import dynamic from "next/dynamic"
-import { Badge } from "./ui/badge"
+import { Badge, BadgeVariant } from "./ui/badge"
 import { Button } from "./ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
-const html2canvas = dynamic(() => import("html2canvas"), { ssr: false })
+const html2canvas = dynamic(() => import("html2canvas"), { 
+  ssr: false,
+  loading: () => null
+})
 
 type StatusType = "active" | "cooling" | "new" | "paused"
 type CardType = "insight" | "comparison" | "pattern" | "relationship"
 
-interface StatItem {
+type StatItem = {
   label: string
   value: string
 }
 
-interface ShareCardProps {
+type StatusType = "active" | "cooling" | "new" | "paused"
+type CardType = "insight" | "comparison" | "pattern" | "relationship"
+
+type ShareCardProps = {
   title: string
   content: string
   stats?: StatItem[]
@@ -74,7 +80,7 @@ export function ShareCard({
     >
       {status && (
         <div className="absolute top-4 right-4">
-          <Badge variant={status === 'active' ? 'default' : 'secondary'}>
+          <Badge variant={status === 'active' ? 'default' : 'secondary' as BadgeVariant}>
             {status}
           </Badge>
         </div>
