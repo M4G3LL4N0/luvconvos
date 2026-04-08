@@ -49,4 +49,6 @@ function Badge({
   })
 }
 
+export type BadgeVariant = keyof typeof badgeVariants.variant
+
 export { Badge, badgeVariants }
