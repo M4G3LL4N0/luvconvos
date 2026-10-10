@@ -66,7 +66,7 @@ Commands are included only when they were detected in the repository manifest; v
 - **Primary language:** JavaScript/TypeScript
 - **Runtime:** Node.js
 - **Package manager:** pnpm
-- **Framework and integration signals:** Go, Next.js, Rust, Supabase, Tailwind
+- **Framework and integration signals:** See the source tree and package manifests; no framework claim is made here without a direct implementation reference.
 - **Entry-point signals:** package.json
 - **Test evidence:** TEST_PLAN.md, vitest.config.ts, vitest.shims.d.ts
 - **Repository topics:** `react`, `typescript`, `app`, `dung30n5`, `next-js`, `noaerth`, `playwright`, `prototype`
